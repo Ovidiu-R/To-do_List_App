@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+header {
+    background-color: brown;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    align-items: center;
+    gap: 15px;
+
+}
+
+h1 {
+    font-size: 60px;
+    padding-left: 20px;
+}
+
+.logoContainer {
+    width: 80px;
+    height: 80px;
+    background-image: url('../media/noun-checklist-6655190.svg');
+    background-size: 100px 100px;
+    background-position: center center;
+}
+
+
+img {
+    height: 50px;
+}
+
+.outerGrid {
+    display: grid;
+    grid-template-rows: 120px 1fr;
+    height: 100vh;
+}
+
+.innerGrid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+nav {
+    background-color: bisque;
+    padding: 30px;
+}
+
+ul {
+    margin-top: 50px;
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+#content {
+    background-color: blanchedalmond;
+}
