@@ -1,4 +1,5 @@
 import './style.css';
+import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -16,6 +17,12 @@ document.addEventListener('keydown', (e) => {
         
     }
 });
-
+initialiseLocalStorage();
+const x = localStorage.getItem('testTask');
+const y = localStorage.getItem('testTask1');
+console.log(x, y);
+const a = JSON.parse(x);
+const b = JSON.parse(y);
+console.log(a,b);
 
 });
