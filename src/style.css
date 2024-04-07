@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Azonix';
+    src: url('../media/Azonix.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -8,9 +15,9 @@ body {
 }
 
 header {
-    background-color: brown;
+    background-color: #17252A;
     display: grid;
-    grid-template-columns: 340px 1fr;
+    grid-template-columns: 500px 1fr;
     align-items: center;
     gap: 15px;
 
@@ -19,6 +26,8 @@ header {
 h1 {
     font-size: 60px;
     padding-left: 20px;
+    color: #FEFFFF;
+    font-family: 'Azonix';
 }
 
 .logoContainer {
@@ -27,6 +36,7 @@ h1 {
     background-image: url('../media/noun-checklist-6655190.svg');
     background-size: 100px 100px;
     background-position: center center;
+    filter: invert(89%) sepia(0%) saturate(944%) hue-rotate(206deg) brightness(110%) contrast(110%);
 }
 
 
@@ -46,7 +56,7 @@ img {
 }
 
 nav {
-    background-color: bisque;
+    background-color: #3AAFA9;
     padding: 30px;
 }
 
@@ -58,8 +68,48 @@ ul {
 li {
     margin-bottom: 20px;
     font-size: 40px;
+    /* font-family: 'Azonix'; */
 }
 
 #content {
-    background-color: blanchedalmond;
+    background-color: #DEF2F1;
+}
+
+dialog {
+    height: 400px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+dialog.active {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+}
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modalBody {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+li>button {
+    height: 40px;
+    width: 200px;
+    border: none;
+    text-align: right;
+    /* border: transparent solid 1px; */ 
+    background-color: transparent;  
+    font-size: 40px;
+    
+}
+li>button:hover {
+    color: gold;
+    text-shadow: 0 0 20px gold;
+}
+li>button:focus {
+    outline: none;
 }

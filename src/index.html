@@ -14,10 +14,10 @@
         <div class="innerGrid">
             <nav>
                 <ul>
-                    <li>All</li>
-                    <li>Today</li>
-                    <li>This week</li>
-                    <li>Projects</li>
+                    <li><button id="all">All</button></li>
+                    <li><button id="day">Today</button></li>
+                    <li><button id="week">This&nbsp;Week</button></li>
+                    <li><button id="projects">Projects</button></li>
                 </ul>
             </nav>
             <div id="content">
@@ -25,5 +25,26 @@
             </div>
         </div>
     </div>
+    <dialog id="modal" class="taskModal">
+        <div class="modalHeader">
+            <h1>Add new...</h1>
+        </div>
+        <div class="modalBody">
+            <nav class="modalNav">
+                <h2>Task</h2>
+                <h2>Project</h2>
+            </nav>
+            <div class="modalContent">
+                <input type="text">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <p>Deadline:</p>
+                <input type="date">
+                <p>Priority:</p>
+                <button id="low">LOW</button>
+                <button id="medium">MEDIUM</button>
+                <button id="high">HIGH</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 </html>
