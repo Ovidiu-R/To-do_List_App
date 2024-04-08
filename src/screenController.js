@@ -15,7 +15,7 @@ export const screenController = () => {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 modal.classList.remove('active');
-                closeModal();
+                modal.close();
                 
             }
         });

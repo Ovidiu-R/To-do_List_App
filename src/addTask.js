@@ -4,7 +4,7 @@ const details = document.getElementById('details');
 const date = document.getElementById('date');
 const priorityButtons = document.querySelectorAll('.option');
 let activePriority = null;
-const addNewTask = document.getElementById('addTask');
+const submit = document.getElementById('addTask');
     
 
 export const addTask = () => {
@@ -14,13 +14,16 @@ export const addTask = () => {
 
 const dataValidityChecker = () => {
     priorityHandler();
-    if (title.checkValidity() && date.checkValidity() && activePriority !== null) {
-        addNewTask.querySelector('click', () => {      
-            const newTask = new Task(title.value, details.value, date.value, activePriority.value, "test");
-            console.log(newTask);
+    if (/*title.validity.valid && date.validity.valid &&*/ activePriority !== null) {
+        console.log('TEST');
+
+        submit.addEventListener('click', (event) => {      
+            event.preventDefault();
+            // const newTask = new Task(title.value, details.value, date.value, activePriority.value, "test");
+            // console.log(newTask);
             console.log('TEST');
-        });
-    }
+        }, flase);
+    } else {console.log('fuck')}
 }
 
 class Task {
@@ -44,6 +47,8 @@ const priorityHandler = () => {
             });
             button.classList.add('active');
             activePriority = button;
+            console.log(activePriority);
+
         });
     });
 }

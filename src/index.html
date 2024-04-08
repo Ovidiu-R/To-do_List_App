@@ -36,15 +36,17 @@
                 <h2>Project</h2>
             </nav>
             <div class="modalContent">
-                <input id="title" type="text" required placeholder="Task name">
-                <textarea name="" id="details" cols="30" rows="10" placeholder="Details..."></textarea>
-                <p>Deadline:</p>
-                <input id="date" type="date" required>
-                <p>Priority:</p>
-                <button class="option" id="low" value="low">LOW</button>
-                <button class="option" id="medium" value="medium">MEDIUM</button>
-                <button class="option" id="high" value="high">HIGH</button>
-                <button id="addTask">Add Task</button>
+                <form action="">
+                    <input id="title" type="text" required placeholder="Task name">
+                    <textarea name="" id="details" cols="30" rows="10" placeholder="Details..."></textarea>
+                    <p>Deadline:</p>
+                    <input id="date" type="date" required>
+                    <p>Priority:</p>
+                    <button type="button" class="option" id="low" value="low">LOW</button>
+                    <button type="button" class="option" id="medium" value="medium">MEDIUM</button>
+                    <button type="button" class="option" id="high" value="high">HIGH</button>
+                    <input type="submit" id="addTask" value="Add Task">
+                </form>
             </div>
         </div>
     </dialog>
