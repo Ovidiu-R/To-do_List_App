@@ -10,7 +10,7 @@ export const initialiseLocalStorage = () => {
         title: 'Shopping',
         description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
         deadline: '15/04/2024',
-        priority: 'medium'
+        priority: 'medium',
         project: 'test'
     };
     const testTask3 = {
@@ -48,5 +48,5 @@ export const initialiseLocalStorage = () => {
     localStorage.setItem('testTask4', JSON.stringify(testTask4));
     localStorage.setItem('testTask5', JSON.stringify(testTask5));
     localStorage.setItem('testTask6', JSON.stringify(testTask6));
-}
+};
 

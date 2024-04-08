@@ -73,6 +73,13 @@ li {
 
 #content {
     background-color: #DEF2F1;
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 100px);
+}
+
+.task {
+    height: 100px;
+
 }
 
 dialog {
@@ -112,4 +119,33 @@ li>button:hover {
 }
 li>button:focus {
     outline: none;
+}
+
+#addNew {
+    height: 60px;
+    width: 60px;
+    background-image: url(../media/plus.svg);
+    background-size: 80px 80px;
+    background-position: center center;
+    border: none;
+    background-color: transparent;
+    margin-top: 300px;
+    margin-left: 150px;
+}
+
+#addNew:hover {
+    filter: invert(78%) sepia(50%) saturate(2543%) hue-rotate(3deg) brightness(109%) contrast(105%);
+}
+#addNew:focus {
+    outline: none;
+}
+
+.active#low {
+    background-color: yellow;
+}
+.active#medium {
+    background-color: orange;
+}
+.active#high {
+    background-color: red;
 }
