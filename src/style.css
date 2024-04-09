@@ -84,7 +84,7 @@ li {
 
 dialog {
     height: 400px;
-    width: 600px;
+    width: 700px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -97,10 +97,18 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 }
-
+.modalHeader {
+    height: 50px;
+    background-color: #17252A;
+    display: grid;
+}
+.modalHeader h1 {
+    font-size: 32px;
+    align-self: center;
+}
 .modalBody {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 150px 1fr;
 }
 
 li>button {
@@ -108,7 +116,6 @@ li>button {
     width: 200px;
     border: none;
     text-align: right;
-    /* border: transparent solid 1px; */ 
     background-color: transparent;  
     font-size: 40px;
     
@@ -140,12 +147,76 @@ li>button:focus {
     outline: none;
 }
 
-.active#low {
-    background-color: yellow;
+form {
+    margin-top: 20px;
+    margin-left: 30px;
 }
-.active#medium {
-    background-color: orange;
+#deadline {
+    margin-top: 20px;
+    display: inline-block;
 }
-.active#high {
-    background-color: red;
+#priority {
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+}
+#date {
+    margin-left: 10px;
+}
+
+.radioButtons{
+    display: grid;
+    grid-template-columns: repeat(3, 65px);
+    margin-left: 10px;
+    padding-top: 5px;
+    gap: 12px;
+}
+
+.radioButton {
+    width: 65px;
+    height: 25px;
+    position: relative;
+    
+}
+
+.radioButton label,
+.radioButton input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+}
+
+
+.radioButton input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+
+}
+
+.radioButton input[type="radio"]:checked + label {
+    background: gold;
+    border-radius: 6px;
+}
+
+.radioButton label {
+    z-index: 90;
+    line-height: 1.8em;
+    text-align: center;
+    border: solid black 1px;
+    font-size: 12px;
+}
+#title, textarea {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+#title{
+    margin-bottom: 15px;
+
 }

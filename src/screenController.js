@@ -10,6 +10,7 @@ export const screenController = () => {
             modal.showModal();
             modal.classList.add('active');
             addTask();
+            modal.close();
         });
         
         document.addEventListener('keydown', (e) => {

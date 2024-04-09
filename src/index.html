@@ -37,14 +37,30 @@
             </nav>
             <div class="modalContent">
                 <form action="">
-                    <input id="title" type="text" required placeholder="Task name">
-                    <textarea name="" id="details" cols="30" rows="10" placeholder="Details..."></textarea>
-                    <p>Deadline:</p>
-                    <input id="date" type="date" required>
-                    <p>Priority:</p>
-                    <button type="button" class="option" id="low" value="low">LOW</button>
+                    <input id="title" type="text" required placeholder="Task name...">
+                    <textarea name="" id="details" cols="48" rows="8" placeholder="Details..."></textarea><br>
+                    <p id="deadline">Deadline:</p>
+                    <input id="date" type="date" required><br>
+                    <div id="priority">
+                        <p>Priority:</p>
+                        <div class="radioButtons">
+                            <div class="radioButton">
+                                <input type="radio" id="low" name="priority" required>
+                                <label for="low" >LOW</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" id="medium" name="priority">
+                                <label for="low" >MEDIUM</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" id="high" name="priority">
+                                <label for="low" >HIGH</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button type="button" class="option" id="low" value="low">LOW</button>
                     <button type="button" class="option" id="medium" value="medium">MEDIUM</button>
-                    <button type="button" class="option" id="high" value="high">HIGH</button>
+                    <button type="button" class="option" id="high" value="high">HIGH</button> -->
                     <input type="submit" id="addTask" value="Add Task">
                 </form>
             </div>
