@@ -2,8 +2,7 @@
 const title = document.getElementById('title');
 const details = document.getElementById('details');
 const date = document.getElementById('date');
-const priorityButtons = document.querySelectorAll('.option');
-let activePriority = null;
+
 const submit = document.getElementById('addTask');
     
 
@@ -13,13 +12,17 @@ export const addTask = () => {
 }
 
 const dataValidityChecker = () => {
-    // priorityHandler();
-    submit.addEventListener('click', (event) => {   
+    submit.addEventListener('click', (event) => { 
+        let priority = document.querySelector("input[name='priority']:checked"); 
         // event.preventDefault();   
-        // if (title.validity.valid && date.validity.valid && activePriority !== null) {
-            
-            // console.log('THROUGH');
-        // } else {console.log('NOT THROUGH');}
+        console.log(priority);
+        if (priority !== null) {
+            const newTask = new Task(title.value, details.value, date.value, priority.value, 'test');
+            console.log(newTask);
+            localStorage.setItem('test', JSON.stringify(testTask));
+            // modal.close();
+        } else {console.log('AAAAAAAAAAAAAAAA')}
+        
     });
 
 }
@@ -30,6 +33,7 @@ class Task {
         this.details = details;
         this.date = date;
         this.priority = priority;
+        this.project = project;
     }
 
 
