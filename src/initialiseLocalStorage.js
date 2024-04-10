@@ -1,45 +1,45 @@
 export const initialiseLocalStorage = () => {
     const testTask1 = {
-        title: 'BLAH',
-        description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
+        title: 'Feed the cat!',
+        description: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
         deadline: '15/04/2024',
         priority: 'medium',
-        project: 'test'
+        project: 'default'
     };
     const testTask2 = {
         title: 'Shopping',
         description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
         deadline: '15/04/2024',
         priority: 'medium',
-        project: 'test'
+        project: 'default'
     };
     const testTask3 = {
-        title: 'Shopping',
-        description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
+        title: 'Pay council tax',
+        description: 'Any delays will slap a fine on top of the amount due',
         deadline: '15/04/2024',
-        priority: 'medium',
-        project: 'test'
+        priority: 'high',
+        project: 'default'
     };
     const testTask4 = {
-        title: 'Shopping',
-        description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
-        deadline: '15/04/2024',
+        title: 'Mega DnD session',
+        description: 'Set aside 8 hours and acquire pelnty of snacks to keep me going',
+        deadline: '19/04/2024',
         priority: 'medium',
-        project: 'test'
+        project: 'default'
     };
     const testTask5 = {
-        title: 'Shopping',
-        description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
+        title: 'Workout',
+        description: 'Weighted dips, bodyweight rows and overhead press',
         deadline: '15/04/2024',
-        priority: 'medium',
-        project: 'test'
+        priority: 'high',
+        project: 'default'
     };
     const testTask6 = {
-        title: 'Shopping',
-        description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
+        title: 'Hoover living room',
+        description: '',
         deadline: '15/04/2024',
         priority: 'medium',
-        project: 'test'
+        project: 'default'
     };
     
     localStorage.setItem('testTask1', JSON.stringify(testTask1));
