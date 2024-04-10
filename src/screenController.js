@@ -2,8 +2,6 @@ import { addTask } from './addTask'
 
 export const screenController = () => {
     document.addEventListener('DOMContentLoaded', () => {
-        
-
         const modal = document.querySelector('dialog'); 
         const addNew = document.getElementById('addNew');
         
@@ -16,7 +14,6 @@ export const screenController = () => {
                 const value = localStorage.getItem(key);
                 console.log(`${key}: ${value}`);
             }
-            // modal.close();
         });
         
         document.addEventListener('keydown', (e) => {

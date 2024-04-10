@@ -75,11 +75,13 @@ li {
     background-color: #DEF2F1;
     display: grid;
     grid-template-rows: repeat(auto-fit, 100px);
+    padding-left: 20px;
+    overflow: scroll;
 }
 
 .task {
     height: 100px;
-
+    border: 1px solid black;
 }
 
 dialog {

@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { renderContent } from './renderContent';
 const title = document.getElementById('title');
 const details = document.getElementById('details');
 const date = document.getElementById('date');
@@ -20,9 +21,10 @@ const dataValidityChecker = () => {
             console.log(newTask);
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
-            closeModal();
+            resetModal();
             modal.close();
             modal.classList.remove('active');
+            renderContent();
             // modal.style.display = 'none';
         } else {
             form.reportValidity();
@@ -33,7 +35,7 @@ const dataValidityChecker = () => {
 
 }
 
-function closeModal() {
+function resetModal() {
     title.value = '';
     details.value = '';
     date.value = '';
