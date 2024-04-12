@@ -23,6 +23,7 @@ export const screenController = () => {
                 
             }
         });
+        //EVENT LISTENER FOR DETAILS, EDIT AND REMOVE BUTTONS
     });
 }
 

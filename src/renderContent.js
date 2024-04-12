@@ -15,8 +15,12 @@ const createElements = (key, task) => {
     const container = document.createElement('div');
     container.setAttribute('class', 'task');
     container.setAttribute('id', key);
+    // container.setAttribute('data-key', )
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
+    if (task.completion === true) {
+        checkbox.checked = true;
+    }
     const title = document.createElement('p');
     title.textContent = task.title;
     const details = document.createElement('button');
@@ -30,3 +34,4 @@ const createElements = (key, task) => {
     container.append(checkbox, title, details, date, edit, erase);
     content.append(container);
 }
+

@@ -50,6 +50,7 @@ class Task {
         this.details = details;
         this.date = date;
         this.priority = priority;
+        this.completion = false;
         this.project = project;
     }
 

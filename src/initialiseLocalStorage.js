@@ -4,6 +4,7 @@ export const initialiseLocalStorage = () => {
         description: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
         deadline: '15/04/2024',
         priority: 'medium',
+        completion: false,
         project: 'default'
     };
     const testTask2 = {
@@ -11,6 +12,7 @@ export const initialiseLocalStorage = () => {
         description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
         deadline: '15/04/2024',
         priority: 'medium',
+        completion: false,
         project: 'default'
     };
     const testTask3 = {
@@ -18,6 +20,7 @@ export const initialiseLocalStorage = () => {
         description: 'Any delays will slap a fine on top of the amount due',
         deadline: '15/04/2024',
         priority: 'high',
+        completion: false,
         project: 'default'
     };
     const testTask4 = {
@@ -25,6 +28,7 @@ export const initialiseLocalStorage = () => {
         description: 'Set aside 8 hours and acquire pelnty of snacks to keep me going',
         deadline: '19/04/2024',
         priority: 'medium',
+        completion: false,
         project: 'default'
     };
     const testTask5 = {
@@ -32,6 +36,7 @@ export const initialiseLocalStorage = () => {
         description: 'Weighted dips, bodyweight rows and overhead press',
         deadline: '15/04/2024',
         priority: 'high',
+        completion: false,
         project: 'default'
     };
     const testTask6 = {
@@ -39,6 +44,7 @@ export const initialiseLocalStorage = () => {
         description: '',
         deadline: '15/04/2024',
         priority: 'medium',
+        completion: false,
         project: 'default'
     };
     
