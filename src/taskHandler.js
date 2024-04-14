@@ -8,10 +8,6 @@ const form = document.querySelector('form');
 const radioButtons = document.querySelectorAll("input[name='priority']");
 
 export const addTask = () => {
-    dataValidityChecker();
-}
-
-const dataValidityChecker = () => {
     submit.addEventListener('click', (event) => { 
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
@@ -28,8 +24,7 @@ const dataValidityChecker = () => {
         } else {
             form.reportValidity();
             console.log('INVALID');}
-
-        
+    
     });
 
 }
@@ -52,6 +47,12 @@ class Task {
         this.completion = false;
         this.project = project;
     }
+    editTask(key) {
 
+    }
 
 } 
+
+export const deleteTask = (deleteKey) => {
+    localStorage.removeItem(deleteKey);
+}

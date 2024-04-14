@@ -28,9 +28,10 @@ const createElements = (key, task) => {
     const date = document.createElement('p');
     date.textContent = task.date;
     const edit = document.createElement('button');
-    edit.textContent = 'edit';
+    edit.textContent = 'Edit';
     const erase = document.createElement('button');
-    erase.textContent = 'delete';
+    erase.classList.add('erase');
+    erase.textContent = 'Erase';
     container.append(checkbox, title, details, date, edit, erase);
     content.append(container);
 }

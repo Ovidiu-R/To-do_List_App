@@ -1,8 +1,8 @@
 import './style.css';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
-import { screenController } from './screenController';
-import { renderContent } from './renderContent';
+import { interactivityHandler } from './interactivityHandler';
+import { fetchTasks } from './displayHandler';
 
-screenController();
+interactivityHandler();
 initialiseLocalStorage();
-renderContent();
+fetchTasks();
