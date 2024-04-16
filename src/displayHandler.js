@@ -12,25 +12,29 @@ export const fetchTasks = () => {
 }
 
 const displayTasks = (key, task) => {
-    const container = document.createElement('div');
-    container.setAttribute('class', 'task');
-    container.setAttribute('id', key);
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    if (task.completion === true) {
-        checkbox.checked = true;
+    if (key !== 'firstSetup') {
+        const container = document.createElement('div');
+        container.setAttribute('class', 'task');
+        container.setAttribute('id', key);
+        const checkbox = document.createElement('input');
+        checkbox.setAttribute('type', 'checkbox');
+        if (task.completion === true) {
+            checkbox.checked = true;
+        }
+        const title = document.createElement('p');
+        title.textContent = task.title;
+        const details = document.createElement('button');
+        details.textContent = 'Details';
+        const date = document.createElement('p');
+        date.textContent = task.date;
+        const edit = document.createElement('button');
+        edit.textContent = 'Edit';
+        const erase = document.createElement('button');
+        erase.classList.add('erase');
+        erase.textContent = 'Erase';
+        container.append(checkbox, title, details, date, edit, erase);
+        content.append(container);
     }
-    const title = document.createElement('p');
-    title.textContent = task.title;
-    const details = document.createElement('button');
-    details.textContent = 'Details';
-    const date = document.createElement('p');
-    date.textContent = task.date;
-    const edit = document.createElement('button');
-    edit.textContent = 'Edit';
-    const erase = document.createElement('button');
-    erase.classList.add('erase');
-    erase.textContent = 'Erase';
-    container.append(checkbox, title, details, date, edit, erase);
-    content.append(container);
 }
+
+// const orderByDate

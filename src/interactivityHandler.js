@@ -17,5 +17,12 @@ export const interactivityHandler = () => {
                     fetchTasks();
             }
         });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                modal.close();
+                
+            }
+        });
     });
 }
