@@ -1,7 +1,12 @@
+import { initialiseLocalStorage } from './initialiseLocalStorage';
+
+
 const content = document.getElementById('content');
+
 
 export const fetchTasks = () => {
     content.textContent = '';
+    // sortByDate();
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const value = localStorage.getItem(key);
@@ -26,7 +31,7 @@ const displayTasks = (key, task) => {
         const details = document.createElement('button');
         details.textContent = 'Details';
         const date = document.createElement('p');
-        date.textContent = task.date;
+        date.textContent = task.deadline;
         const edit = document.createElement('button');
         edit.textContent = 'Edit';
         const erase = document.createElement('button');
@@ -37,4 +42,26 @@ const displayTasks = (key, task) => {
     }
 }
 
-// const orderByDate
+const sortByDate = () => {
+    const localStorageArray = new Array();
+    for (let i=0; i<localStorage.length; i++) {
+        let key = localStorage.key(i);
+        let item = localStorage.getItem(key);
+        let parsedItem = JSON.parse(item);
+        localStorageArray[i] = parsedItem.deadline + key + item;
+        console.log(localStorageArray);
+        console.log(item);
+    }
+
+
+    // localStorage.sort(function(a, b) {
+    //     const parsedA = JSON.parse(localStorage.getItem(a));
+    //     const parsedB = JSON.parse(localStorage.getItem(b));
+    //     return parsedA - parsedB;
+    // });
+}
+
+export const resetDisplay = () => {
+    localStorage.clear();
+    initialiseLocalStorage();
+}

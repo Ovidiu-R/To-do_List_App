@@ -1,6 +1,9 @@
 import { fetchTasks } from './displayHandler';
+import { resetDisplay } from './displayHandler';
 import { addTask } from './taskHandler';
 import { deleteTask } from './taskHandler';
+import { initialiseLocalStorage } from './initialiseLocalStorage';
+
 
 export const interactivityHandler = () => {
     document.addEventListener('DOMContentLoaded', () => {
@@ -11,10 +14,17 @@ export const interactivityHandler = () => {
                     modal.showModal();
                     modal.classList.add('active');
                     addTask();
+                    break;
                 case (e.target.classList.contains('erase')):
                     let deleteKey = e.target.parentElement.getAttribute('id');
                     deleteTask(deleteKey);
                     fetchTasks();
+                    break;
+                case (e.target.id === 'reset'):
+                    resetDisplay();
+                    initialiseLocalStorage();
+                    fetchTasks();
+                    break;
             }
         });
         document.addEventListener('keydown', (e) => {

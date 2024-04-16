@@ -42,7 +42,7 @@ class Task {
     constructor(title, details, date, priority, project) {
         this.title = title;
         this.details = details;
-        this.date = date;
+        this.deadline = date;
         this.priority = priority;
         this.completion = false;
         this.project = project;
