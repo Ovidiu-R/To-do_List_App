@@ -1,12 +1,11 @@
-import { initialiseLocalStorage } from './initialiseLocalStorage';
-
+import { parseISO, format } from 'date-fns';
 
 const content = document.getElementById('content');
 
 
 export const fetchTasks = () => {
     content.textContent = '';
-    // sortByDate();
+    sortByDate();
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const value = localStorage.getItem(key);
@@ -49,19 +48,27 @@ const sortByDate = () => {
         let item = localStorage.getItem(key);
         let parsedItem = JSON.parse(item);
         localStorageArray[i] = parsedItem.deadline + key + item;
-        console.log(localStorageArray);
-        console.log(item);
     }
+    console.log('before', localStorageArray);
 
+    localStorageArray.sort(function(a, b) {
+        let dateA = formatDate(a.substring(0, 10));
+        let dateB = formatDate(b.substring(0, 10));
+        console.log ('a', dateA);
+        console.log ('b', dateB);
+        // console.log ('WTF', new Date(2024/3/15));
+        return dateA - dateB;
+    });
 
-    // localStorage.sort(function(a, b) {
-    //     const parsedA = JSON.parse(localStorage.getItem(a));
-    //     const parsedB = JSON.parse(localStorage.getItem(b));
-    //     return parsedA - parsedB;
-    // });
+    console.log('after', localStorageArray);
+}
+
+const formatDate = (rawDate) => {
+    const [day, month, year] = rawDate.split('/')
+    const formattedDate = year + '-' + month + '-' + day;
+    return new Date(formattedDate);
 }
 
 export const resetDisplay = () => {
     localStorage.clear();
-    initialiseLocalStorage();
 }
