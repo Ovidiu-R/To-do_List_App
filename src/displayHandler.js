@@ -1,4 +1,4 @@
-import { parseISO, format } from 'date-fns';
+// import { parseISO, format } from 'date-fns';
 
 const content = document.getElementById('content');
 
@@ -6,85 +6,52 @@ const content = document.getElementById('content');
 export const fetchTasks = () => {
     content.textContent = '';
     const sortingArray = [];
-    
-    // sortByDate();
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const value = localStorage.getItem(key);
         const parsedTask = JSON.parse(value);
-        if (!Array.isArray(sortingArray[i])) {
-            sortingArray[i] = [];
+        if (key === 'firstSetup') {
+            sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
+        } else {
+        sortingArray.push(Object.assign(parsedTask, {key: key}))
         }
-        sortingArray[i].push(parsedTask);
-        sortingArray[i].map(v => Object.assign(v, {key: key}))
-        sortingArray.sort(function(a, b) {
-            let dateA = new Date(a.deadline);
-            let dateB = new Date(b.deadline);
-            return dateA - dateB;
-        });        
-        displayTasks(key, parsedTask);
-        
     }
+    sortingArray.sort(function(a, b) {
+        let dateA = new Date(a.deadline);
+        let dateB = new Date(b.deadline);
+        return (dateA - dateB);
+    }); 
+    displayTasks(sortingArray);
     console.log(sortingArray);
 
 }
 
-const displayTasks = (key, task) => {
-    if (key !== 'firstSetup') {
-        const container = document.createElement('div');
-        container.setAttribute('class', 'task');
-        container.setAttribute('id', key);
-        const checkbox = document.createElement('input');
-        checkbox.setAttribute('type', 'checkbox');
-        if (task.completion === true) {
-            checkbox.checked = true;
+const displayTasks = (sortingArray) => {
+    sortingArray.forEach(object => {
+        if (object.key !== 'firstSetup') {
+                const container = document.createElement('div');
+                container.setAttribute('class', 'task');
+                container.setAttribute('id', object.key);
+                const checkbox = document.createElement('input');
+                checkbox.setAttribute('type', 'checkbox');
+                if (object.completion === true) {
+                    checkbox.checked = true;
+                }
+                const title = document.createElement('p');
+                title.textContent = object.title;
+                const details = document.createElement('button');
+                details.textContent = 'Details';
+                const date = document.createElement('p');
+                date.textContent = object.deadline;
+                const edit = document.createElement('button');
+                edit.textContent = 'Edit';
+                const erase = document.createElement('button');
+                erase.classList.add('erase');
+                erase.textContent = 'Erase';
+                container.append(checkbox, title, details, date, edit, erase);
+                content.append(container);
         }
-        const title = document.createElement('p');
-        title.textContent = task.title;
-        const details = document.createElement('button');
-        details.textContent = 'Details';
-        const date = document.createElement('p');
-        date.textContent = task.deadline;
-        const edit = document.createElement('button');
-        edit.textContent = 'Edit';
-        const erase = document.createElement('button');
-        erase.classList.add('erase');
-        erase.textContent = 'Erase';
-        container.append(checkbox, title, details, date, edit, erase);
-        content.append(container);
-    }
-}
-
-const sortByDate = () => {
-    console.log(localStorage);
-    const localStorageArray = new Array();
-    for (let i=0; i<localStorage.length; i++) {
-        let key = localStorage.key(i);
-        let item = localStorage.getItem(key);
-        let parsedItem = JSON.parse(item);
-        localStorageArray[i] = parsedItem.deadline + key + item;
-    }
-    localStorageArray.sort(function(a, b) {
-        let dateA = new Date(a.substring(0, 10));
-        let dateB = new Date(b.substring(0, 10));
-        return dateA - dateB;
     });
-    console.log('after', localStorageArray);
-    // resetDisplay();
-    
-    for (let i=0; i<localStorageArray.length; i++) {
-        // localStorage.setItem()
-
-        const keyRegex = /^.{10}(.*)\{/;
-        const keyResult = localStorageArray[i].match(keyRegex);
-        const itemRegex = new RegExp(".+" + keyResult + "(.+)$");
-        const itemResult = localStorageArray[i].match(itemRegex);
-        if (keyResult) {
-            console.log(keyResult[1]);
-            console.log(itemResult[1]);
-        }
-    }
-
 }
 
 export const resetDisplay = () => {
