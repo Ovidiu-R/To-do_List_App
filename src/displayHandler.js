@@ -5,14 +5,28 @@ const content = document.getElementById('content');
 
 export const fetchTasks = () => {
     content.textContent = '';
-    sortByDate();
+    const sortingArray = [];
+    
+    // sortByDate();
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const value = localStorage.getItem(key);
         const parsedTask = JSON.parse(value);
+        if (!Array.isArray(sortingArray[i])) {
+            sortingArray[i] = [];
+        }
+        sortingArray[i].push(parsedTask);
+        sortingArray[i].map(v => Object.assign(v, {key: key}))
+        sortingArray.sort(function(a, b) {
+            let dateA = new Date(a.deadline);
+            let dateB = new Date(b.deadline);
+            return dateA - dateB;
+        });        
         displayTasks(key, parsedTask);
         
     }
+    console.log(sortingArray);
+
 }
 
 const displayTasks = (key, task) => {
@@ -42,6 +56,7 @@ const displayTasks = (key, task) => {
 }
 
 const sortByDate = () => {
+    console.log(localStorage);
     const localStorageArray = new Array();
     for (let i=0; i<localStorage.length; i++) {
         let key = localStorage.key(i);
@@ -49,24 +64,27 @@ const sortByDate = () => {
         let parsedItem = JSON.parse(item);
         localStorageArray[i] = parsedItem.deadline + key + item;
     }
-    console.log('before', localStorageArray);
-
     localStorageArray.sort(function(a, b) {
-        let dateA = formatDate(a.substring(0, 10));
-        let dateB = formatDate(b.substring(0, 10));
-        console.log ('a', dateA);
-        console.log ('b', dateB);
-        // console.log ('WTF', new Date(2024/3/15));
+        let dateA = new Date(a.substring(0, 10));
+        let dateB = new Date(b.substring(0, 10));
         return dateA - dateB;
     });
-
     console.log('after', localStorageArray);
-}
+    // resetDisplay();
+    
+    for (let i=0; i<localStorageArray.length; i++) {
+        // localStorage.setItem()
 
-const formatDate = (rawDate) => {
-    const [day, month, year] = rawDate.split('/')
-    const formattedDate = year + '-' + month + '-' + day;
-    return new Date(formattedDate);
+        const keyRegex = /^.{10}(.*)\{/;
+        const keyResult = localStorageArray[i].match(keyRegex);
+        const itemRegex = new RegExp(".+" + keyResult + "(.+)$");
+        const itemResult = localStorageArray[i].match(itemRegex);
+        if (keyResult) {
+            console.log(keyResult[1]);
+            console.log(itemResult[1]);
+        }
+    }
+
 }
 
 export const resetDisplay = () => {
