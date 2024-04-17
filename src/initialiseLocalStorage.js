@@ -4,7 +4,7 @@ export const initialiseLocalStorage = () => {
         const testTask1 = {
             title: 'Feed the cat!',
             description: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
-            deadline: '15/04/2024',
+            deadline: '2024-04-15',
             priority: 'medium',
             completion: false,
             project: 'default'
@@ -12,7 +12,7 @@ export const initialiseLocalStorage = () => {
         const testTask2 = {
             title: 'Shopping',
             description: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
-            deadline: '15/04/2024',
+            deadline: '2024-04-16',
             priority: 'medium',
             completion: false,
             project: 'default'
@@ -20,7 +20,7 @@ export const initialiseLocalStorage = () => {
         const testTask3 = {
             title: 'Pay council tax',
             description: 'Any delays will slap a fine on top of the amount due',
-            deadline: '15/04/2024',
+            deadline: '2024-04-18',
             priority: 'high',
             completion: false,
             project: 'default'
@@ -28,7 +28,7 @@ export const initialiseLocalStorage = () => {
         const testTask4 = {
             title: 'Mega DnD session',
             description: 'Set aside 8 hours and acquire pelnty of snacks to keep me going',
-            deadline: '19/04/2024',
+            deadline: '2024-04-19',
             priority: 'medium',
             completion: false,
             project: 'default'
@@ -36,7 +36,7 @@ export const initialiseLocalStorage = () => {
         const testTask5 = {
             title: 'Workout',
             description: 'Weighted dips, bodyweight rows and overhead press',
-            deadline: '15/04/2024',
+            deadline: '2024-04-15',
             priority: 'high',
             completion: false,
             project: 'default'
@@ -44,7 +44,7 @@ export const initialiseLocalStorage = () => {
         const testTask6 = {
             title: 'Hoover living room',
             description: '',
-            deadline: '15/04/2024',
+            deadline: '2024-04-12',
             priority: 'medium',
             completion: false,
             project: 'default'
