@@ -1,13 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchTasks } from './displayHandler';
-const title = document.getElementById('title');
-const details = document.getElementById('details');
-const date = document.getElementById('date');
-const submit = document.getElementById('submit');
-const form = document.querySelector('form');
-const radioButtons = document.querySelectorAll("input[name='priority']");
+import { closeModal } from './displayHandler';
 
 export const addTask = () => {
+    const title = document.getElementById('title');
+    const details = document.getElementById('details');
+    const date = document.getElementById('date');
+    const submit = document.getElementById('submit');
+    const form = document.querySelector('form');
+    // const radioButtons = document.querySelectorAll("input[name='priority']");
+
     submit.addEventListener('click', (event) => { 
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
@@ -16,26 +18,14 @@ export const addTask = () => {
             console.log(newTask);
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
-            resetModal();
-            modal.close();
-            modal.classList.remove('active');
+            closeModal();
             fetchTasks();
-            // modal.style.display = 'none';
         } else {
             form.reportValidity();
             console.log('INVALID');}
     
     });
 
-}
-
-function resetModal() {
-    title.value = '';
-    details.value = '';
-    date.value = '';
-    radioButtons.forEach(radio => {
-        radio.checked = false;
-    });
 }
 
 class Task {

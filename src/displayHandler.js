@@ -1,7 +1,12 @@
 // import { parseISO, format } from 'date-fns';
 
 const content = document.getElementById('content');
-
+const title = document.getElementById('title');
+const details = document.getElementById('details');
+const date = document.getElementById('date');
+const submit = document.getElementById('submit');
+const form = document.querySelector('form');
+const radioButtons = document.querySelectorAll("input[name='priority']");
 
 export const fetchTasks = () => {
     content.textContent = '';
@@ -56,4 +61,16 @@ const displayTasks = (sortingArray) => {
 
 export const resetDisplay = () => {
     localStorage.clear();
+}
+
+export const closeModal = () => {
+    modal.close();
+    modal.classList.remove('active');
+    title.value = '';
+    details.value = '';
+    date.value = '';
+    radioButtons.forEach(radio => {
+        radio.checked = false;
+    });
+    
 }

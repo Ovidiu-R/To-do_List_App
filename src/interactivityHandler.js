@@ -1,8 +1,9 @@
-import { fetchTasks } from './displayHandler';
+import { closeModal, fetchTasks } from './displayHandler';
 import { resetDisplay } from './displayHandler';
 import { addTask } from './taskHandler';
 import { deleteTask } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
+
 
 
 export const interactivityHandler = () => {
@@ -29,9 +30,7 @@ export const interactivityHandler = () => {
         });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                modal.classList.remove('active');
-                modal.close();
-                
+                closeModal();            
             }
         });
     });
