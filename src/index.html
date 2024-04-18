@@ -38,11 +38,11 @@
             </nav>
             <div class="modalContent">
                 <form action="">
-                    <input id="title" type="text" required placeholder="Task name...">
-                    <textarea name="" id="details" cols="48" rows="8" placeholder="Details..."></textarea><br>
-                    <p id="deadline">Deadline:</p>
-                    <input id="date" type="date" required><br>
-                    <div id="priority">
+                    <input class="title" id="title" type="text" required placeholder="Task name...">
+                    <textarea class="details" name="" id="details" cols="48" rows="8" placeholder="Details..."></textarea><br>
+                    <p class="deadline" id="deadline">Deadline:</p>
+                    <input class="date" id="date" type="date" required><br>
+                    <div class="priority" id="priority">
                         <p>Priority:</p>
                         <div class="radioButtons">
                             <div class="radioButton">
@@ -63,6 +63,33 @@
                 </form>
             </div>
         </div>
+    </dialog>
+
+    <dialog id="editModal" class="editModal">
+        <form action="">
+            <input class="title" id="editTitle" type="text" required placeholder="Task name...">
+            <textarea class="details" name="" id="editDetails" cols="48" rows="8" placeholder="Details..."></textarea><br>
+            <p class="deadline" id="editDeadline">Deadline:</p>
+            <input class="date" id="editDate" type="date" required><br>
+            <div class="priority" id="editPriority">
+                <p>Priority:</p>
+                <div class="radioButtons">
+                    <div class="radioButton">
+                        <input type="radio" id="low" value="low" name="priority" required>
+                        <label for="low" >LOW</label>
+                    </div>
+                    <div class="radioButton">
+                        <input type="radio" id="medium" value="medium" name="priority">
+                        <label for="medium" >MEDIUM</label>
+                    </div>
+                    <div class="radioButton">
+                        <input type="radio" id="high" value="high" name="priority">
+                        <label for="high" >HIGH</label>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" id="editSubmit" value="Edit Task">
+        </form>
     </dialog>
 </body>
 </html>

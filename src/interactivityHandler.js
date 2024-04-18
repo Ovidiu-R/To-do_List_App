@@ -1,4 +1,4 @@
-import { closeModal, fetchTasks } from './displayHandler';
+import { openTaskModal, openEditModal, closeModal, fetchTasks } from './displayHandler';
 import { resetDisplay } from './displayHandler';
 import { addTask } from './taskHandler';
 import { deleteTask } from './taskHandler';
@@ -12,8 +12,7 @@ export const interactivityHandler = () => {
         document.addEventListener('click', function(e) {
             switch(true) {
                 case (e.target.id === 'addNew'):
-                    modal.showModal();
-                    modal.classList.add('active');
+                    openTaskModal();
                     addTask();
                     break;
                 case (e.target.classList.contains('erase')):
@@ -25,6 +24,10 @@ export const interactivityHandler = () => {
                     resetDisplay();
                     initialiseLocalStorage();
                     fetchTasks();
+                    break;
+                case (e.target.classList.contains('edit')):
+                    let editKey = e.target.parentElement.getAttribute('id');
+                    openEditModal(editKey);
                     break;
             }
         });

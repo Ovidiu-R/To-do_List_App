@@ -161,17 +161,17 @@ form {
     margin-top: 20px;
     margin-left: 30px;
 }
-#deadline {
+.deadline {
     margin-top: 20px;
     display: inline-block;
 }
-#priority {
+.priority {
     display: grid;
     margin-top: 10px;
     grid-template-columns: 60px 1fr;
     align-items: center;
 }
-#date {
+.date {
     margin-left: 10px;
 }
 
@@ -220,13 +220,13 @@ form {
     border: solid black 1px;
     font-size: 12px;
 }
-#title, textarea {
+.title, textarea {
     border: none;
     outline: none;
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
 }
-#title{
+.title{
     margin-bottom: 15px;
 
 }
