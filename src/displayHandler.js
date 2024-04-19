@@ -1,5 +1,6 @@
 // import { parseISO, format } from 'date-fns';
-const modal = document.querySelector('.taskModal');
+const newModal = document.getElementById('taskModal');
+const editModal = document.getElementById('editModal');
 const content = document.getElementById('content');
 const title = document.querySelectorAll('.title');
 const details = document.querySelectorAll('.details');
@@ -7,7 +8,6 @@ const date = document.querySelectorAll('.date');
 // const submit = document.getElementById('submit');
 // const form = document.querySelector('form');
 const radioButtons = document.querySelectorAll("input[name='priority']");
-const editModal = document.querySelector('.editModal');
 
 export const fetchTasks = () => {
     content.textContent = '';
@@ -66,8 +66,8 @@ export const resetDisplay = () => {
 }
 
 export const openTaskModal = () => {
-    modal.showModal();
-    modal.classList.add('active');
+    newModal.showModal();
+    newModal.classList.add('active');
 }
 
 export const openEditModal = (editKey) => {
@@ -75,29 +75,55 @@ export const openEditModal = (editKey) => {
     const editDetails = document.getElementById('editDetails');
     const editDate = document.getElementById('editDate');
     const taskToEdit = JSON.parse(localStorage.getItem(editKey));
+    const oldPriority = document.getElementById(`${taskToEdit.priority}Edit`);
+    console.log(oldPriority);
     editModal.showModal();
     editTitle.value = taskToEdit.title;
-    editDetails.value = taskToEdit.title;
-    editDate.value = taskToEdit.title;
+    editDetails.value = taskToEdit.details;
+    editDate.value = taskToEdit.deadline;
+    oldPriority.checked = true;
 }
 
 export const closeModal = () => {
-    const editTitle = document.querySelector('editTitle');
-
-    modal.close();
-    modal.classList.remove('active');
+    let newTaskStyle = window.getComputedStyle(newTaskStyle);
+    let editTaskStyle = window.getComputedStyle(editTaskStyle);
     title.forEach(title => {
-        title.value = '';
+        let style = window.getComputedStyle(title);
+        if (style.display !== 'none') {
+            title.value = '';
+        }
     });
     details.forEach(details => {
-        details.value = '';
+        let style = window.getComputedStyle(details);
+        if (style.display !== 'none') {
+            details.value = '';
+        }
+        
     });
     date.forEach(date => {
-        date.value = '';
+        let style = window.getComputedStyle(date);
+        if (style.display !== 'none') {
+            date.value = '';
+        }
+        
     });
     
     radioButtons.forEach(radio => {
-        radio.checked = false;
+        let style = window.getComputedStyle(radio);
+        if (style.display !== 'none') {
+            radio.checked = false;
+        }
+        
     });
     
+    switch(true) {
+        case (newTaskStyle.display !== 'none'):
+            newModal.close();
+            newModal.classList.remove('active');
+            break;
+        case (editTaskStyle.display !== 'none'):
+            editModal.close();
+            editModal.classList.remove('active');
+            break;
+    }
 }

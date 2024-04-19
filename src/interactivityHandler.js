@@ -1,6 +1,6 @@
 import { openTaskModal, openEditModal, closeModal, fetchTasks } from './displayHandler';
 import { resetDisplay } from './displayHandler';
-import { addTask } from './taskHandler';
+import { addTask, editTask } from './taskHandler';
 import { deleteTask } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
@@ -8,7 +8,7 @@ import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 export const interactivityHandler = () => {
     document.addEventListener('DOMContentLoaded', () => {
-        const modal = document.querySelector('dialog'); 
+        // const modal = document.querySelector('dialog'); 
         document.addEventListener('click', function(e) {
             switch(true) {
                 case (e.target.id === 'addNew'):
@@ -28,6 +28,7 @@ export const interactivityHandler = () => {
                 case (e.target.classList.contains('edit')):
                     let editKey = e.target.parentElement.getAttribute('id');
                     openEditModal(editKey);
+                    editTask(editKey);
                     break;
             }
         });

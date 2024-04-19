@@ -7,8 +7,7 @@ export const addTask = () => {
     const details = document.getElementById('details');
     const date = document.getElementById('date');
     const submit = document.getElementById('submit');
-    const form = document.querySelector('form');
-    // const radioButtons = document.querySelectorAll("input[name='priority']");
+    const form = document.getElementById('newTaskForm');
 
     submit.addEventListener('click', (event) => { 
         const priority = document.querySelector("input[name='priority']:checked"); 
@@ -22,10 +21,34 @@ export const addTask = () => {
             fetchTasks();
         } else {
             form.reportValidity();
-            console.log('INVALID');}
+            console.log('INVALID');
+        }
     
     });
+}
 
+export const editTask = (editKey) => {
+    const titleEdit = document.getElementById('editTitle');
+    const detailsEdit = document.getElementById('editDetails');
+    const dateEdit = document.getElementById('editDate');
+    const submitEdit = document.getElementById('editSubmit');
+    const editForm = document.getElementById('editTaskForm');
+
+    submitEdit.addEventListener('click', (event) => { 
+        const priority = document.querySelector("input[name='priority']:checked"); 
+        event.preventDefault();   
+        if (editForm.checkValidity()){
+            const newTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, 'test');
+            console.log(newTask);
+            const taskKey = editKey;
+            localStorage.setItem(taskKey, JSON.stringify(newTask));
+            closeModal();
+            fetchTasks();
+        } else {
+            editForm.reportValidity();
+            console.log('INVALID');
+        }
+    });
 }
 
 class Task {
