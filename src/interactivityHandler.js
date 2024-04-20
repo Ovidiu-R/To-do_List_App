@@ -27,6 +27,7 @@ export const interactivityHandler = () => {
                     break;
                 case (e.target.classList.contains('edit')):
                     let editKey = e.target.parentElement.getAttribute('id');
+                    console.log(editKey);
                     openEditModal(editKey);
                     editTask(editKey);
                     break;

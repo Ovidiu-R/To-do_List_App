@@ -85,8 +85,8 @@ export const openEditModal = (editKey) => {
 }
 
 export const closeModal = () => {
-    let newTaskStyle = window.getComputedStyle(newTaskStyle);
-    let editTaskStyle = window.getComputedStyle(editTaskStyle);
+    // let newTaskStyle = window.getComputedStyle(newTaskStyle);
+    // let editTaskStyle = window.getComputedStyle(editTaskStyle);
     title.forEach(title => {
         let style = window.getComputedStyle(title);
         if (style.display !== 'none') {
@@ -116,14 +116,19 @@ export const closeModal = () => {
         
     });
     
-    switch(true) {
-        case (newTaskStyle.display !== 'none'):
-            newModal.close();
-            newModal.classList.remove('active');
-            break;
-        case (editTaskStyle.display !== 'none'):
-            editModal.close();
-            editModal.classList.remove('active');
-            break;
-    }
+    // switch(true) {
+    //     case (newTaskStyle.display !== 'none'):
+    //         newModal.close();
+    //         newModal.classList.remove('active');
+    //         break;
+    //     case (editTaskStyle.display !== 'none'):
+    //         editModal.close();
+    //         editModal.classList.remove('active');
+    //         break;
+    // }
+
+        newModal.close();
+        editModal.close();
+        newModal.classList.remove('active');
+
 }

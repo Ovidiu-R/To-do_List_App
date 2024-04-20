@@ -38,10 +38,10 @@ export const editTask = (editKey) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (editForm.checkValidity()){
-            const newTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, 'test');
-            console.log(newTask);
-            const taskKey = editKey;
-            localStorage.setItem(taskKey, JSON.stringify(newTask));
+            const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, 'test');
+            console.log(editTask);
+            const taskKey2 = editKey;
+            localStorage.setItem(taskKey2, JSON.stringify(editTask));
             closeModal();
             fetchTasks();
         } else {
