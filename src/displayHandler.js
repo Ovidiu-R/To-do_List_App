@@ -5,8 +5,6 @@ const content = document.getElementById('content');
 const title = document.querySelectorAll('.title');
 const details = document.querySelectorAll('.details');
 const date = document.querySelectorAll('.date');
-// const submit = document.getElementById('submit');
-// const form = document.querySelector('form');
 const radioButtons = document.querySelectorAll("input[name='priority']");
 
 export const fetchTasks = () => {
@@ -36,7 +34,7 @@ const displayTasks = (sortingArray) => {
     sortingArray.forEach(object => {
         if (object.key !== 'firstSetup') {
                 const container = document.createElement('div');
-                container.setAttribute('class', 'task');
+                container.classList.add('task', `${object.priority}`);
                 container.setAttribute('id', object.key);
                 const checkbox = document.createElement('input');
                 checkbox.setAttribute('type', 'checkbox');
@@ -76,7 +74,6 @@ export const openEditModal = (editKey) => {
     const editDate = document.getElementById('editDate');
     const taskToEdit = JSON.parse(localStorage.getItem(editKey));
     const oldPriority = document.getElementById(`${taskToEdit.priority}Edit`);
-    // console.log(oldPriority);
     editModal.showModal();
     editTitle.value = taskToEdit.title;
     editDetails.value = taskToEdit.details;
@@ -85,8 +82,6 @@ export const openEditModal = (editKey) => {
 }
 
 export const closeModal = () => {
-    // let newTaskStyle = window.getComputedStyle(newTaskStyle);
-    // let editTaskStyle = window.getComputedStyle(editTaskStyle);
     title.forEach(title => {
         let style = window.getComputedStyle(title);
         if (style.display !== 'none') {
@@ -115,20 +110,8 @@ export const closeModal = () => {
         }
         
     });
-    
-    // switch(true) {
-    //     case (newTaskStyle.display !== 'none'):
-    //         newModal.close();
-    //         newModal.classList.remove('active');
-    //         break;
-    //     case (editTaskStyle.display !== 'none'):
-    //         editModal.close();
-    //         editModal.classList.remove('active');
-    //         break;
-    // }
-
-        newModal.close();
-        editModal.close();
-        newModal.classList.remove('active');
+    newModal.close();
+    editModal.close();
+    newModal.classList.remove('active');
 
 }

@@ -89,7 +89,11 @@ li {
     align-items: center;
     gap: 15px;
     padding-right: 10px;
+    border-radius: 8px;
+}
 
+.task:hover{
+    box-shadow: 0px 0px 3px 1px #000000;;
 }
 
 dialog {
@@ -229,4 +233,16 @@ form {
 .title{
     margin-bottom: 15px;
 
+}
+
+.low {
+    background-color: yellow;
+}
+
+.medium {
+    background-color: orange;
+}
+
+.high {
+    background-color: red;
 }

@@ -23,7 +23,6 @@ export const addTask = () => {
             form.reportValidity();
             console.log('INVALID');
         }
-        // event.stopImmediatePropagation();
     });
 }
 
@@ -36,7 +35,6 @@ export const editTask = (editKey) => {
     console.log('initial edit key', editKey);
     
    //The function must be written first before it is called, otherwise it will throw an uncaught reference error
-   //Removing the eventListener after the code has been run ensures that there will only ever be one active at any given time    
 
     const handleSubmission = (event) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
@@ -52,7 +50,9 @@ export const editTask = (editKey) => {
             editForm.reportValidity();
             console.log('INVALID');
         }
-        
+
+    //Removing the eventListener after the code has been run ensures that there will only ever be one active at any given time    
+    
         event.stopImmediatePropagation();
         submitEdit.removeEventListener('click', handleSubmission);
     };
