@@ -13,13 +13,13 @@ export const fetchTasks = () => {
     content.textContent = '';
     const sortingArray = [];
     for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key);
+        const currentKey = localStorage.key(i);
+        const value = localStorage.getItem(currentKey);
         const parsedTask = JSON.parse(value);
-        if (key === 'firstSetup') {
+        if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
         } else {
-        sortingArray.push(Object.assign(parsedTask, {key: key}))
+        sortingArray.push(Object.assign(parsedTask, {key: currentKey}))
         }
     }
     sortingArray.sort(function(a, b) {
@@ -76,7 +76,7 @@ export const openEditModal = (editKey) => {
     const editDate = document.getElementById('editDate');
     const taskToEdit = JSON.parse(localStorage.getItem(editKey));
     const oldPriority = document.getElementById(`${taskToEdit.priority}Edit`);
-    console.log(oldPriority);
+    // console.log(oldPriority);
     editModal.showModal();
     editTitle.value = taskToEdit.title;
     editDetails.value = taskToEdit.details;

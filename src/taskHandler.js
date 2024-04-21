@@ -23,7 +23,7 @@ export const addTask = () => {
             form.reportValidity();
             console.log('INVALID');
         }
-    
+        // event.stopImmediatePropagation();
     });
 }
 
@@ -33,22 +33,30 @@ export const editTask = (editKey) => {
     const dateEdit = document.getElementById('editDate');
     const submitEdit = document.getElementById('editSubmit');
     const editForm = document.getElementById('editTaskForm');
+    console.log('initial edit key', editKey);
+    
+   //The function must be written first before it is called, otherwise it will throw an uncaught reference error
+   //Removing the eventListener after the code has been run ensures that there will only ever be one active at any given time    
 
-    submitEdit.addEventListener('click', (event) => { 
+    const handleSubmission = (event) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (editForm.checkValidity()){
             const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, 'test');
-            console.log(editTask);
-            const taskKey2 = editKey;
-            localStorage.setItem(taskKey2, JSON.stringify(editTask));
+            console.log('editTask', editTask);
+            console.log('editKey', editKey);
+            localStorage.setItem(editKey, JSON.stringify(editTask));
             closeModal();
             fetchTasks();
         } else {
             editForm.reportValidity();
             console.log('INVALID');
         }
-    });
+        
+        event.stopImmediatePropagation();
+        submitEdit.removeEventListener('click', handleSubmission);
+    };
+    submitEdit.addEventListener('click', handleSubmission);
 }
 
 class Task {
@@ -60,9 +68,9 @@ class Task {
         this.completion = false;
         this.project = project;
     }
-    editTask(key) {
+    // editTask(key) {
 
-    }
+    // }
 
 } 
 

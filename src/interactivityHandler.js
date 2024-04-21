@@ -4,7 +4,8 @@ import { addTask, editTask } from './taskHandler';
 import { deleteTask } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
-
+/*The insidious problem of multiple event listeners being attached to the same element, leading to unpredictable problems has reared its ugly head again
+Making use of stopImmediatePropagation() seems to have stopped one of the issue, to do with input focus, but the key duplication issue remains for now*/
 
 export const interactivityHandler = () => {
     document.addEventListener('DOMContentLoaded', () => {
@@ -26,10 +27,11 @@ export const interactivityHandler = () => {
                     fetchTasks();
                     break;
                 case (e.target.classList.contains('edit')):
-                    let editKey = e.target.parentElement.getAttribute('id');
-                    console.log(editKey);
+                    const editKey = e.target.parentElement.getAttribute('id');
+                    console.log('edit key', editKey);
                     openEditModal(editKey);
                     editTask(editKey);
+                    e.stopImmediatePropagation();
                     break;
             }
         });
