@@ -1,4 +1,4 @@
-import { openTaskModal, openEditModal, closeModal, fetchTasks } from './displayHandler';
+import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails } from './displayHandler';
 import { resetDisplay } from './displayHandler';
 import { addTask, editTask, taskCompletionTrigger } from './taskHandler';
 import { deleteTask } from './taskHandler';
@@ -37,6 +37,13 @@ export const interactivityHandler = () => {
                     taskCompletionTrigger(checkKey);
                     fetchTasks();
                     // e.stopImmediatePropagation();
+                    break;
+                case (e.target.classList.contains('details')):
+                    const detailKey = e.target.parentElement.getAttribute('id');
+                    viewDetails(detailKey);
+                    break;
+                case (e.target.id === 'closeDetails'):
+                    closeModal();
                     break;
             }
         });

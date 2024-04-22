@@ -5,6 +5,11 @@
     font-style: normal;
   }
 
+:root {
+    --primary-color: #17252A;
+    --secondary-color: #3AAFA9;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +21,7 @@ body {
 }
 
 header {
-    background-color: #17252A;
+    background-color: var(--primary-color);
     display: grid;
     grid-template-columns: 500px 1fr;
     align-items: center;
@@ -57,7 +62,7 @@ img {
 }
 
 nav {
-    background-color: #3AAFA9;
+    background-color: var(--secondary-color);
     padding: 30px;
 }
 
@@ -102,6 +107,7 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    /* background-color: var(--secondary-color); */
 }
 dialog.active {
     display: grid;
@@ -245,4 +251,30 @@ form {
 
 .high {
     background-color: red;
+}
+
+#detailModal {
+    height: 300px;
+    width: 500px;
+    padding-top: 30px;
+    background-color: var(--secondary-color);
+}
+
+#detailModal * {
+    margin-left: 20px;
+    margin-bottom: 30px;
+
+}
+
+#viewTitle {
+    color: black;
+    padding-left: 0px;
+    font-size: 30px;
+}
+
+#closeDetails {
+    font-size: 17px;
+    height: 30px;
+    width: 70px;
+    margin-top: 30px;
 }

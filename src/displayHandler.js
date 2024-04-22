@@ -1,6 +1,7 @@
 // import { parseISO, format } from 'date-fns';
 const newModal = document.getElementById('taskModal');
 const editModal = document.getElementById('editModal');
+const detailModal = document.getElementById('detailModal');
 const content = document.getElementById('content');
 const title = document.querySelectorAll('.title');
 const details = document.querySelectorAll('.details');
@@ -45,6 +46,7 @@ const displayTasks = (sortingArray) => {
                 const title = document.createElement('p');
                 title.textContent = object.title;
                 const details = document.createElement('button');
+                details.classList.add('details');
                 details.textContent = 'Details';
                 const date = document.createElement('p');
                 date.textContent = object.deadline;
@@ -82,6 +84,20 @@ export const openEditModal = (editKey) => {
     oldPriority.checked = true;
 }
 
+export const viewDetails = (key) => {
+    const detailModal = document.getElementById('detailModal');
+    const viewTitle = document.getElementById('viewTitle');
+    const viewDetails = document.getElementById('viewDetails');
+    const viewDeadline = document.getElementById('viewDeadline');
+    const viewPriority = document.getElementById('viewPriority');
+    detailModal.showModal();
+    const parsedTask = JSON.parse(localStorage.getItem(key));
+    viewTitle.textContent = parsedTask.title;
+    viewDetails.textContent = parsedTask.details;
+    viewDeadline.textContent = `Deadline:  ${parsedTask.deadline}`;
+    viewPriority.textContent = `Priority:  ${parsedTask.priority}`;
+}
+
 export const closeModal = () => {
     title.forEach(title => {
         let style = window.getComputedStyle(title);
@@ -113,6 +129,7 @@ export const closeModal = () => {
     });
     newModal.close();
     editModal.close();
+    detailModal.close();
     newModal.classList.remove('active');
 
 }
