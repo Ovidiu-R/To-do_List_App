@@ -1,6 +1,6 @@
 import { openTaskModal, openEditModal, closeModal, fetchTasks } from './displayHandler';
 import { resetDisplay } from './displayHandler';
-import { addTask, editTask } from './taskHandler';
+import { addTask, editTask, taskCompletionTrigger } from './taskHandler';
 import { deleteTask } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
@@ -9,12 +9,12 @@ Making use of stopImmediatePropagation() seems to have stopped one of the issue,
 
 export const interactivityHandler = () => {
     document.addEventListener('DOMContentLoaded', () => {
-        // const modal = document.querySelector('dialog'); 
         document.addEventListener('click', function(e) {
             switch(true) {
                 case (e.target.id === 'addNew'):
                     openTaskModal();
                     addTask();
+                    e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('erase')):
                     let deleteKey = e.target.parentElement.getAttribute('id');
@@ -28,10 +28,15 @@ export const interactivityHandler = () => {
                     break;
                 case (e.target.classList.contains('edit')):
                     const editKey = e.target.parentElement.getAttribute('id');
-                    console.log('edit key', editKey);
                     openEditModal(editKey);
                     editTask(editKey);
                     e.stopImmediatePropagation();
+                    break;
+                case (e.target.classList.contains('completion')):
+                    const checkKey = e.target.parentElement.getAttribute('id');
+                    taskCompletionTrigger(checkKey);
+                    fetchTasks();
+                    // e.stopImmediatePropagation();
                     break;
             }
         });

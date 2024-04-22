@@ -38,6 +38,7 @@ const displayTasks = (sortingArray) => {
                 container.setAttribute('id', object.key);
                 const checkbox = document.createElement('input');
                 checkbox.setAttribute('type', 'checkbox');
+                checkbox.classList.add('completion');
                 if (object.completion === true) {
                     checkbox.checked = true;
                 }

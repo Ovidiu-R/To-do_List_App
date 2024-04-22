@@ -13,7 +13,7 @@ export const addTask = () => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (form.checkValidity()){
-            const newTask = new Task(title.value, details.value, date.value, priority.value, 'test');
+            const newTask = new Task(title.value, details.value, date.value, priority.value, false, 'test');
             console.log(newTask);
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
@@ -40,7 +40,7 @@ export const editTask = (editKey) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (editForm.checkValidity()){
-            const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, 'test');
+            const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, 'test');
             console.log('editTask', editTask);
             console.log('editKey', editKey);
             localStorage.setItem(editKey, JSON.stringify(editTask));
@@ -59,13 +59,21 @@ export const editTask = (editKey) => {
     submitEdit.addEventListener('click', handleSubmission);
 }
 
+export const taskCompletionTrigger = (checkKey) => {
+    const parsedTask = JSON.parse(localStorage.getItem(checkKey));
+    const taskCompletion = !parsedTask.completion;
+    const triggeredTask = new Task(parsedTask.title, parsedTask.details, parsedTask.deadline, parsedTask.priority, taskCompletion, 'test');
+    localStorage.setItem(checkKey, JSON.stringify(triggeredTask));
+    fetchTasks();
+}
+
 class Task {
-    constructor(title, details, date, priority, project) {
+    constructor(title, details, date, priority, completion, project) {
         this.title = title;
         this.details = details;
         this.deadline = date;
         this.priority = priority;
-        this.completion = false;
+        this.completion = completion;
         this.project = project;
     }
     // editTask(key) {

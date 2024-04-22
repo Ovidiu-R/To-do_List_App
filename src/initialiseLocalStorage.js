@@ -6,7 +6,7 @@ export const initialiseLocalStorage = () => {
             details: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
             deadline: '2024-04-15',
             priority: 'medium',
-            completion: false,
+            completion: true,
             project: 'default'
         };
         const testTask2 = {
@@ -22,7 +22,7 @@ export const initialiseLocalStorage = () => {
             details: 'Any delays will slap a fine on top of the amount due',
             deadline: '2024-04-18',
             priority: 'high',
-            completion: false,
+            completion: true,
             project: 'default'
         };
         const testTask4 = {
