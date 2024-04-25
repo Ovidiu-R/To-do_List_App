@@ -63,7 +63,7 @@ img {
 
 nav {
     background-color: var(--secondary-color);
-    padding: 30px;
+    padding: 10px 10px 10px 20px;
 }
 
 ul {
@@ -131,6 +131,36 @@ dialog::backdrop {
     grid-template-columns: 150px 1fr;
 }
 
+.modalNav {
+    display: grid;
+    grid-template-rows: 50px 50px;
+    align-items: center;
+}
+
+.modalNav>button {
+    background: transparent;
+    border: none;
+    border-bottom: 3px transparent solid;
+    font-size: 25px;
+    text-align: left;
+    padding: 10px 10px 0px 0px;
+}
+.modalNav>button:hover {
+    border-bottom: 3px black solid;
+
+}
+button:focus{
+    outline: none;
+}
+
+#taskButton {
+    width: 60px;
+}
+
+#projectButton {
+    width: 90px;
+}
+
 li>button {
     height: 40px;
     width: 200px;
@@ -159,6 +189,10 @@ li>button:focus {
     margin-top: 300px;
     margin-left: 150px;
 }
+
+/* #reset {
+    margin-top: 350px;
+} */
 
 #addNew:hover {
     filter: invert(78%) sepia(50%) saturate(2543%) hue-rotate(3deg) brightness(109%) contrast(105%);
