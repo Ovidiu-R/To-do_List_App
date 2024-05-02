@@ -140,15 +140,34 @@ dialog::backdrop {
 .modalNav>button {
     background: transparent;
     border: none;
-    border-bottom: 3px transparent solid;
+    border-bottom: 1px solid transparent;
     font-size: 25px;
     text-align: left;
     padding: 10px 10px 0px 0px;
 }
-.modalNav>button:hover {
-    border-bottom: 3px black solid;
 
+.modalNav>button:hover {
+    border-bottom: 1px black solid;
 }
+
+.selected:focus {
+    border-bottom: 3px black solid !important;
+}
+
+.submitButtons {
+    height: 20px;
+    width: 50px;
+}
+
+#submitProject {
+    display: block;
+    margin-top: 20px;
+}
+
+#newProjectForm {
+    display: none;
+}
+
 button:focus{
     outline: none;
 }

@@ -1,6 +1,9 @@
 export const initialiseLocalStorage = () => {
     if (localStorage.getItem('firstSetup') === null) {
         const firstSetup = true;
+        const projectArray = [
+            {name: 'default'}
+        ];
         const testTask1 = {
             title: 'Feed the cat!',
             details: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
@@ -51,6 +54,7 @@ export const initialiseLocalStorage = () => {
         };
         
         localStorage.setItem('firstSetup', JSON.stringify(firstSetup));
+        localStorage.setItem('projectArray', JSON.stringify(projectArray));
         localStorage.setItem('testTask1', JSON.stringify(testTask1));
         localStorage.setItem('testTask2', JSON.stringify(testTask2));
         localStorage.setItem('testTask3', JSON.stringify(testTask3));

@@ -34,10 +34,10 @@
         </div>
         <div class="modalBody">
             <nav class="modalNav">
-                <button id="taskButton">Task</button>
+                <button id="taskButton" class="selected" >Task</button>
                 <button id="projectButton">Project</button>
             </nav>
-            <div class="modalContent">
+            <div id="modalContent" class="modalContent">
                 <form id="newTaskForm" action="">
                     <input class="title" id="title" type="text" required placeholder="Task name...">
                     <textarea class="details" name="" id="details" cols="48" rows="8" placeholder="Details..."></textarea><br>
@@ -60,7 +60,11 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" id="submit" value="AddTask">
+                    <input class="submitButtons" type="submit" id="submit" name="AddTask">
+                </form>
+                <form action="" id="newProjectForm">
+                    <input class="title" id="projectTitle" type="text" required placeholder="Project name...">
+                    <input class="submitButtons" type="submit" id="submitProject" name="AddProject">
                 </form>
             </div>
         </div>

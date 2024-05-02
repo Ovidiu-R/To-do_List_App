@@ -26,6 +26,23 @@ export const addTask = () => {
     });
 }
 
+export const addProject = () => {
+    const projectForm = document.getElementById('newProjectForm');
+    const projectTitle = document.getElementById('projectTitle');
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    // submitProject.addEventListener('click', (event) => {
+        // event.preventDefault();
+        const titleText = projectTitle.textContent;
+        if (projectForm.checkValidity()){
+            projectArray.push({name: titleText});
+            localStorage.setItem('projectArray', JSON.stringify(projectArray));
+            closeModal();
+        } else {
+            projectForm.reportValidity();
+        }
+    // });
+}
+
 export const editTask = (editKey) => {
     const titleEdit = document.getElementById('editTitle');
     const detailsEdit = document.getElementById('editDetails');
