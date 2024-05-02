@@ -33,7 +33,7 @@ export const fetchTasks = () => {
 
 const displayTasks = (sortingArray) => {
     sortingArray.forEach(object => {
-        if (object.key !== 'firstSetup') {
+        if (object.key !== 'firstSetup' && object.key !== 'projectArray') {
                 const container = document.createElement('div');
                 container.classList.add('task', `${object.priority}`);
                 container.setAttribute('id', object.key);
@@ -46,7 +46,7 @@ const displayTasks = (sortingArray) => {
                 const title = document.createElement('p');
                 title.textContent = object.title;
                 const details = document.createElement('button');
-                details.classList.add('details');
+                details.classList.add('taskDetails');
                 details.textContent = 'Details';
                 const date = document.createElement('p');
                 date.textContent = object.deadline;
@@ -69,6 +69,26 @@ export const resetDisplay = () => {
 export const openTaskModal = () => {
     newModal.showModal();
     newModal.classList.add('active');
+}
+
+export const taskProjectToggle = (buttonId) => {
+    const modalContent = document.getElementById('modalContent');
+    const taskForm = document.getElementById('newTaskForm');
+    const projectForm = document.getElementById('newProjectForm');
+    const taskButton = document.getElementById('taskButton');
+    const projectButton = document.getElementById('projectButton');
+    if (taskButton.classList.contains('selected') && buttonId === 'projectButton') {
+        taskButton.classList.remove('selected');
+        projectButton.classList.add('selected');
+        taskForm.style.display = 'none';
+        projectForm.style.display = 'block';    
+    } else if (projectButton.classList.contains('selected') && buttonId === 'taskButton') {
+        projectButton.classList.remove('selected');
+        taskButton.classList.add('selected');
+        projectForm.style.display = 'none';
+        taskForm.style.display = 'block';
+        
+    }
 }
 
 export const openEditModal = (editKey) => {
