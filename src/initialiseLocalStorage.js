@@ -2,7 +2,8 @@ export const initialiseLocalStorage = () => {
     if (localStorage.getItem('firstSetup') === null) {
         const firstSetup = true;
         const projectArray = [
-            {name: 'default'}
+            {name: 'Default'},
+            {name: 'TestProject'}
         ];
         const testTask1 = {
             title: 'Feed the cat!',
@@ -10,7 +11,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-15',
             priority: 'medium',
             completion: true,
-            project: 'default'
+            project: 'TestProject'
         };
         const testTask2 = {
             title: 'Shopping',
@@ -18,7 +19,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-16',
             priority: 'medium',
             completion: false,
-            project: 'default'
+            project: 'TestProject'
         };
         const testTask3 = {
             title: 'Pay council tax',
@@ -26,7 +27,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-18',
             priority: 'high',
             completion: true,
-            project: 'default'
+            project: 'Default'
         };
         const testTask4 = {
             title: 'Mega DnD session',
@@ -34,7 +35,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-19',
             priority: 'medium',
             completion: false,
-            project: 'default'
+            project: 'Default'
         };
         const testTask5 = {
             title: 'Workout',
@@ -42,7 +43,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-15',
             priority: 'high',
             completion: false,
-            project: 'default'
+            project: 'Default'
         };
         const testTask6 = {
             title: 'Hoover living room',
@@ -50,7 +51,7 @@ export const initialiseLocalStorage = () => {
             deadline: '2024-04-12',
             priority: 'medium',
             completion: false,
-            project: 'default'
+            project: 'Default'
         };
         
         localStorage.setItem('firstSetup', JSON.stringify(firstSetup));

@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchTasks } from './displayHandler';
-import { closeModal } from './displayHandler';
+import { fetchTasks, closeModal, displayProjects } from './displayHandler';
 
 export const addTask = () => {
     const title = document.getElementById('title');
@@ -30,17 +29,15 @@ export const addProject = () => {
     const projectForm = document.getElementById('newProjectForm');
     const projectTitle = document.getElementById('projectTitle');
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
-    // submitProject.addEventListener('click', (event) => {
-        // event.preventDefault();
-        const titleText = projectTitle.textContent;
+        const titleText = projectTitle.value;
         if (projectForm.checkValidity()){
-            projectArray.push({name: titleText});
+            projectArray.push({name: `${titleText}`});
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
             closeModal();
+            displayProjects();
         } else {
             projectForm.reportValidity();
         }
-    // });
 }
 
 export const editTask = (editKey) => {
@@ -79,9 +76,9 @@ export const editTask = (editKey) => {
 export const taskCompletionTrigger = (checkKey) => {
     const parsedTask = JSON.parse(localStorage.getItem(checkKey));
     const taskCompletion = !parsedTask.completion;
-    const triggeredTask = new Task(parsedTask.title, parsedTask.details, parsedTask.deadline, parsedTask.priority, taskCompletion, 'test');
+    const triggeredTask = new Task(parsedTask.title, parsedTask.details, parsedTask.deadline, parsedTask.priority, taskCompletion, parsedTask.project);
     localStorage.setItem(checkKey, JSON.stringify(triggeredTask));
-    fetchTasks();
+    // fetchTasks();
 }
 
 class Task {

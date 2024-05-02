@@ -8,7 +8,7 @@ const details = document.querySelectorAll('.details');
 const date = document.querySelectorAll('.date');
 const radioButtons = document.querySelectorAll("input[name='priority']");
 
-export const fetchTasks = () => {
+export const fetchTasks = (selectedProject) => {
     content.textContent = '';
     const sortingArray = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -17,8 +17,10 @@ export const fetchTasks = () => {
         const parsedTask = JSON.parse(value);
         if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
-        } else {
-        sortingArray.push(Object.assign(parsedTask, {key: currentKey}))
+        } else if (selectedProject === undefined){
+            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
+        } else if (parsedTask.project === selectedProject){
+            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
         }
     }
     sortingArray.sort(function(a, b) {
@@ -152,4 +154,17 @@ export const closeModal = () => {
     detailModal.close();
     newModal.classList.remove('active');
 
+}
+
+export const displayProjects = () => {
+    const wrapper = document.getElementById('projectWrapper');
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    wrapper.textContent = "";
+    projectArray.forEach(project => {
+        const projectName = document.createElement('button');
+        projectName.setAttribute('id', `${project.name}`);
+        projectName.textContent = project.name;
+        projectName.classList.add('projectButton');
+        wrapper.appendChild(projectName);
+    });
 }

@@ -17,7 +17,6 @@
 
 body {
     height: 100vh;
-    /* overflow: hidden; */
 }
 
 header {
@@ -64,6 +63,7 @@ img {
 nav {
     background-color: var(--secondary-color);
     padding: 10px 10px 10px 20px;
+    max-height: 100vh - 120px;
 }
 
 ul {
@@ -74,7 +74,34 @@ ul {
 li {
     margin-bottom: 20px;
     font-size: 40px;
-    /* font-family: 'Azonix'; */
+}
+
+#projectWrapper {
+    height: 350px;
+    width: 191px;
+    margin-left: 80px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 50px);
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.projectButton {
+    height: 50px;
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    text-align: left;
+    border-bottom: 1px solid transparent;
+}
+
+.projectButton:hover{
+    border-bottom: 1px solid black;
+
 }
 
 #content {
@@ -107,7 +134,6 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* background-color: var(--secondary-color); */
 }
 dialog.active {
     display: grid;
@@ -205,12 +231,12 @@ li>button:focus {
     background-position: center center;
     border: none;
     background-color: transparent;
-    margin-top: 300px;
+    margin-top: 30px;
     margin-left: 150px;
 }
 
 /* #reset {
-    margin-top: 350px;
+    margin-top: -50px;
 } */
 
 #addNew:hover {
