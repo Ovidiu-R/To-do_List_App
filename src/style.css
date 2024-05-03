@@ -104,6 +104,10 @@ li {
 
 }
 
+.projectButton:focus{
+    border-bottom: 1px solid black;
+}
+
 #content {
     background-color: #DEF2F1;
     display: grid;

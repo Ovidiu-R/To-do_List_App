@@ -1,6 +1,6 @@
 import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects } from './displayHandler';
 import { resetDisplay, taskProjectToggle } from './displayHandler';
-import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject } from './taskHandler';
+import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, setActiveProject } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 /*The insidious problem of multiple event listeners being attached to the same element, leading to unpredictable 
@@ -54,11 +54,12 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'projectButton' || e.target.id === 'taskButton'): //TOGGLE FORM DISPLAY
                     taskProjectToggle(e.target.id);
                     break;
-                case (e.target.classList.contains('projectButton')):
+                case (e.target.classList.contains('projectButton')): //FILTER TASKS BY PROJECT
                     const selectedProject = e.target.id;
+                    setActiveProject(selectedProject);
                     fetchTasks(selectedProject);
                     break;
-                case (e.target.id === 'all'):
+                case (e.target.id === 'all'):                       //SHOW ALL TASKS
                     fetchTasks();
                     break;
 

@@ -1,28 +1,44 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchTasks, closeModal, displayProjects } from './displayHandler';
 
+// const activeProjectGlobal = undefined;
+
 export const addTask = () => {
     const title = document.getElementById('title');
     const details = document.getElementById('details');
     const date = document.getElementById('date');
     const submit = document.getElementById('submit');
     const form = document.getElementById('newTaskForm');
+    const activeProject = document.querySelector('.activeProject');
+    if (activeProject.id === null){
+        activeProject = null;
+    }
 
     submit.addEventListener('click', (event) => { 
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (form.checkValidity()){
-            const newTask = new Task(title.value, details.value, date.value, priority.value, false, 'test');
+            const newTask = new Task(title.value, details.value, date.value, priority.value, false, activeProject.id);
             console.log(newTask);
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
-            fetchTasks();
+            fetchTasks(activeProject.id);
         } else {
             form.reportValidity();
             console.log('INVALID');
         }
     });
+}
+
+export const setActiveProject = (selectedProject) => {
+    const activeProject = document.getElementById(selectedProject);
+    const projectButtons = document.querySelectorAll('.projectButton');
+    projectButtons.forEach(project => {
+        project.classList.remove('activeProject');
+    });
+    // activeProjectGlobal = selectedProject;
+    activeProject.classList.add('activeProject');
 }
 
 export const addProject = () => {
