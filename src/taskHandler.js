@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { fetchTasks, closeModal, displayProjects } from './displayHandler';
 
-// const activeProjectGlobal = undefined;
-
 export const addTask = () => {
     const title = document.getElementById('title');
     const details = document.getElementById('details');
@@ -10,34 +8,35 @@ export const addTask = () => {
     const submit = document.getElementById('submit');
     const form = document.getElementById('newTaskForm');
     const activeProject = document.querySelector('.activeProject');
-    if (activeProject.id === null){
-        activeProject = null;
+    if (activeProject !== null) {
+        var activeProjectId = activeProject.id;
     }
 
-    submit.addEventListener('click', (event) => { 
+    const handleNewSubmission = (event) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (form.checkValidity()){
-            const newTask = new Task(title.value, details.value, date.value, priority.value, false, activeProject.id);
-            console.log(newTask);
+            const newTask = new Task(title.value, details.value, date.value, priority.value, false, activeProjectId);
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
-            fetchTasks(activeProject.id);
+            fetchTasks(activeProjectId);
         } else {
             form.reportValidity();
-            console.log('INVALID');
         }
-    });
+        // event.stopImmediatePropagation();
+        submit.removeEventListener('click', handleNewSubmission);
+    }
+    submit.addEventListener('click', handleNewSubmission); 
+
 }
 
-export const setActiveProject = (selectedProject) => {
-    const activeProject = document.getElementById(selectedProject);
+export const setActiveProject = (selectedProjectId) => {
+    const activeProject = document.getElementById(selectedProjectId);
     const projectButtons = document.querySelectorAll('.projectButton');
     projectButtons.forEach(project => {
         project.classList.remove('activeProject');
     });
-    // activeProjectGlobal = selectedProject;
     activeProject.classList.add('activeProject');
 }
 
@@ -62,17 +61,14 @@ export const editTask = (editKey) => {
     const dateEdit = document.getElementById('editDate');
     const submitEdit = document.getElementById('editSubmit');
     const editForm = document.getElementById('editTaskForm');
-    console.log('initial edit key', editKey);
     
    //The function must be written first before it is called, otherwise it will throw an uncaught reference error
 
-    const handleSubmission = (event) => {
+    const handleEdit = (event) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (editForm.checkValidity()){
             const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, 'test');
-            console.log('editTask', editTask);
-            console.log('editKey', editKey);
             localStorage.setItem(editKey, JSON.stringify(editTask));
             closeModal();
             fetchTasks();
@@ -83,10 +79,10 @@ export const editTask = (editKey) => {
 
     //Removing the eventListener after the code has been run ensures that there will only ever be one active at any given time    
     
-        event.stopImmediatePropagation();
-        submitEdit.removeEventListener('click', handleSubmission);
+        // event.stopImmediatePropagation();
+        submitEdit.removeEventListener('click', handleEdit);
     };
-    submitEdit.addEventListener('click', handleSubmission);
+    submitEdit.addEventListener('click', handleEdit);
 }
 
 export const taskCompletionTrigger = (checkKey) => {
@@ -106,9 +102,6 @@ class Task {
         this.completion = completion;
         this.project = project;
     }
-    // editTask(key) {
-
-    // }
 
 } 
 

@@ -14,12 +14,12 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'addNew'):                    //OPEN DIALOG MODAL TO ADD TASK/PROJECT
                     openTaskModal();
                     addTask();
-                    e.stopImmediatePropagation();
+                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'submitProject'):             //SUBMIT PROJECT
                     e.preventDefault();
                     addProject();
-                    e.stopImmediatePropagation();
+                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('erase')):        //ERASE TASK
                     const deleteKey = e.target.parentElement.getAttribute('id');
@@ -36,13 +36,11 @@ export const interactivityHandler = () => {
                     const editKey = e.target.parentElement.getAttribute('id');
                     openEditModal(editKey);
                     editTask(editKey);
-                    e.stopImmediatePropagation();
+                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('completion')):   //CHECK TASK COMPLETION
                     const checkKey = e.target.parentElement.getAttribute('id');
                     taskCompletionTrigger(checkKey);
-                    // fetchTasks();
-                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('taskDetails')):  //VIEW TASK DETAILS
                     const detailKey = e.target.parentElement.getAttribute('id');
@@ -54,10 +52,11 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'projectButton' || e.target.id === 'taskButton'): //TOGGLE FORM DISPLAY
                     taskProjectToggle(e.target.id);
                     break;
-                case (e.target.classList.contains('projectButton')): //FILTER TASKS BY PROJECT
+                case (e.target.classList.contains('projectButton')): //SELECT PROJECT / FILTER BY PROJECT
                     const selectedProject = e.target.id;
                     setActiveProject(selectedProject);
                     fetchTasks(selectedProject);
+                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'all'):                       //SHOW ALL TASKS
                     fetchTasks();
