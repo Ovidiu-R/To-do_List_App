@@ -32,12 +32,15 @@ export const addTask = () => {
 }
 
 export const setActiveProject = (selectedProjectId) => {
+    console.log('active', selectedProjectId);
     const activeProject = document.getElementById(selectedProjectId);
     const projectButtons = document.querySelectorAll('.projectButton');
     projectButtons.forEach(project => {
         project.classList.remove('activeProject');
     });
-    activeProject.classList.add('activeProject');
+    if (selectedProjectId !== undefined) {
+        activeProject.classList.add('activeProject');
+    }
 }
 
 export const addProject = () => {

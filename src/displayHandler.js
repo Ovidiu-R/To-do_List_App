@@ -8,7 +8,12 @@ const details = document.querySelectorAll('.details');
 const date = document.querySelectorAll('.date');
 const radioButtons = document.querySelectorAll("input[name='priority']");
 
-export const fetchTasks = (selectedProject) => {
+export const fetchTasks = () => {
+    const activeProject = document.querySelector('.activeProject');         //fetchTasks used to take as a parameter the projectId of the selected project button and, comparing
+    let selectedProjectId = undefined;                                      //it to the parsedTask.project, silter the right tasks when the function is called. 
+    if (activeProject !== null) {
+        selectedProjectId = activeProject.id;
+    }
     content.textContent = '';
     const sortingArray = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -17,9 +22,9 @@ export const fetchTasks = (selectedProject) => {
         const parsedTask = JSON.parse(value);
         if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
-        } else if (selectedProject === undefined){
+        } else if (selectedProjectId === undefined){
             sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
-        } else if (parsedTask.project === selectedProject){
+        } else if (parsedTask.project === selectedProjectId){
             sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
         }
     }
@@ -71,26 +76,32 @@ export const resetDisplay = () => {
 export const openTaskModal = () => {
     newModal.showModal();
     newModal.classList.add('active');
+    openTaskForm();
+
 }
 
-export const taskProjectToggle = (buttonId) => {
-    const modalContent = document.getElementById('modalContent');
+export const openTaskForm = () => {
     const taskForm = document.getElementById('newTaskForm');
     const projectForm = document.getElementById('newProjectForm');
     const taskButton = document.getElementById('taskButton');
     const projectButton = document.getElementById('projectButton');
-    if (taskButton.classList.contains('selected') && buttonId === 'projectButton') {
-        taskButton.classList.remove('selected');
-        projectButton.classList.add('selected');
-        taskForm.style.display = 'none';
-        projectForm.style.display = 'block';    
-    } else if (projectButton.classList.contains('selected') && buttonId === 'taskButton') {
-        projectButton.classList.remove('selected');
-        taskButton.classList.add('selected');
-        projectForm.style.display = 'none';
-        taskForm.style.display = 'block';
-        
-    }
+    projectButton.classList.remove('selected');
+    taskButton.classList.add('selected');
+    projectForm.style.display = 'none';
+    taskForm.style.display = 'block';
+    console.log('task form selected');
+}
+
+export const openProjectForm = () => {
+    const taskForm = document.getElementById('newTaskForm');
+    const projectForm = document.getElementById('newProjectForm');
+    const taskButton = document.getElementById('taskButton');
+    const projectButton = document.getElementById('projectButton');
+    taskButton.classList.remove('selected');
+    projectButton.classList.add('selected');
+    taskForm.style.display = 'none';
+    projectForm.style.display = 'block';
+    console.log('project form selected');
 }
 
 export const openEditModal = (editKey) => {

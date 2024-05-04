@@ -1,5 +1,5 @@
 import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects } from './displayHandler';
-import { resetDisplay, taskProjectToggle } from './displayHandler';
+import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
 import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, setActiveProject } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
@@ -49,16 +49,22 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'closeDetails'):              //CLOSE DETAILS
                     closeModal();
                     break;
-                case (e.target.id === 'projectButton' || e.target.id === 'taskButton'): //TOGGLE FORM DISPLAY
-                    taskProjectToggle(e.target.id);
+                case (e.target.id === 'taskButton'):                //OPEN TASK FORM
+                    openTaskForm();
+                    e.stopImmediatePropagation();
+                    break;
+                    case (e.target.id === 'projectButton'):         //OPEN PROJECT FORM
+                    openProjectForm();
+                    e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('projectButton')): //SELECT PROJECT / FILTER BY PROJECT
                     const selectedProject = e.target.id;
                     setActiveProject(selectedProject);
-                    fetchTasks(selectedProject);
-                    // e.stopImmediatePropagation();
+                    fetchTasks();
+                    e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'all'):                       //SHOW ALL TASKS
+                    setActiveProject(undefined);
                     fetchTasks();
                     break;
 
