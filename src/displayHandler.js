@@ -167,7 +167,7 @@ export const closeModal = () => {
 
 }
 
-export const displayProjects = () => {
+export const displayProjects = (newProject) => {
     const wrapper = document.getElementById('projectWrapper');
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
     wrapper.textContent = "";
@@ -176,6 +176,9 @@ export const displayProjects = () => {
         projectName.setAttribute('id', `${project.name}`);
         projectName.textContent = project.name;
         projectName.classList.add('projectButton');
+        if (project.name === newProject) {
+            projectName.classList.add('activeProject');
+        }
         wrapper.appendChild(projectName);
     });
 }

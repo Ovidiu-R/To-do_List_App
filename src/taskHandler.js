@@ -7,12 +7,15 @@ export const addTask = () => {
     const date = document.getElementById('date');
     const submit = document.getElementById('submit');
     const form = document.getElementById('newTaskForm');
-    const activeProject = document.querySelector('.activeProject');
-    if (activeProject !== null) {
-        var activeProjectId = activeProject.id;
-    }
+    
 
     const handleNewSubmission = (event) => {
+        const activeProject = document.querySelector('.activeProject');         //The activeProject button must be accessed within the confines of the 
+        console.log('activeProject', activeProject);                            //event handler, otherwise it will access the old value every time
+        let activeProjectId = undefined;
+        if (activeProject !== null) {
+            activeProjectId = activeProject.id;
+        }
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (form.checkValidity()){
@@ -21,10 +24,11 @@ export const addTask = () => {
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
             fetchTasks(activeProjectId);
+            console.log('activeProjectId', activeProjectId);
         } else {
             form.reportValidity();
         }
-        // event.stopImmediatePropagation();
+        event.stopImmediatePropagation();
         submit.removeEventListener('click', handleNewSubmission);
     }
     submit.addEventListener('click', handleNewSubmission); 
@@ -45,14 +49,15 @@ export const setActiveProject = (selectedProjectId) => {
 
 export const addProject = () => {
     const projectForm = document.getElementById('newProjectForm');
-    const projectTitle = document.getElementById('projectTitle');
+    const projectInput = document.getElementById('projectTitle');
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
-        const titleText = projectTitle.value;
+        const projectTitle = projectInput.value;
         if (projectForm.checkValidity()){
-            projectArray.push({name: `${titleText}`});
+            projectArray.push({name: `${projectTitle}`});
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
             closeModal();
-            displayProjects();
+            displayProjects(projectTitle);
+
         } else {
             projectForm.reportValidity();
         }

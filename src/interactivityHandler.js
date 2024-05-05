@@ -19,7 +19,8 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'submitProject'):             //SUBMIT PROJECT
                     e.preventDefault();
                     addProject();
-                    // e.stopImmediatePropagation();
+                    fetchTasks();
+                    e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('erase')):        //ERASE TASK
                     const deleteKey = e.target.parentElement.getAttribute('id');
@@ -61,7 +62,7 @@ export const interactivityHandler = () => {
                     const selectedProject = e.target.id;
                     setActiveProject(selectedProject);
                     fetchTasks();
-                    e.stopImmediatePropagation();
+                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'all'):                       //SHOW ALL TASKS
                     setActiveProject(undefined);

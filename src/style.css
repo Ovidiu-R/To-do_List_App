@@ -104,7 +104,11 @@ li {
 
 }
 
-.projectButton:focus{
+/* .projectButton:focus{
+    border-bottom: 1px solid black;
+} */
+
+.activeProject {
     border-bottom: 1px solid black;
 }
 
