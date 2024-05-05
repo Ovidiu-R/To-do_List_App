@@ -174,7 +174,7 @@ export const displayProjects = (newProject) => {
     projectArray.forEach(project => {
         const projectName = document.createElement('button');
         projectName.setAttribute('id', `${project.name}`);
-        projectName.textContent = project.name;
+        projectName.textContent = `(${project.counter})`+ project.name;
         projectName.classList.add('projectButton');
         if (project.name === newProject) {
             projectName.classList.add('activeProject');

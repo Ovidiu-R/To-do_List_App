@@ -2,8 +2,8 @@ export const initialiseLocalStorage = () => {
     if (localStorage.getItem('firstSetup') === null) {
         const firstSetup = true;
         const projectArray = [
-            {name: 'Default'},
-            {name: 'TestProject'}
+            {name: 'Default', counter: 4},
+            {name: 'TestProject', counter: 2}
         ];
         const testTask1 = {
             title: 'Feed the cat!',

@@ -11,7 +11,6 @@ export const addTask = () => {
 
     const handleNewSubmission = (event) => {
         const activeProject = document.querySelector('.activeProject');         //The activeProject button must be accessed within the confines of the 
-        console.log('activeProject', activeProject);                            //event handler, otherwise it will access the old value every time
         let activeProjectId = undefined;
         if (activeProject !== null) {
             activeProjectId = activeProject.id;
@@ -24,7 +23,8 @@ export const addTask = () => {
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
             fetchTasks(activeProjectId);
-            console.log('activeProjectId', activeProjectId);
+            incrementProjectCounter(activeProjectId);
+            displayProjects(activeProjectId);
         } else {
             form.reportValidity();
         }
@@ -35,8 +35,27 @@ export const addTask = () => {
 
 }
 
+const incrementProjectCounter = (activeProjectId) => {
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    projectArray.forEach(project => {
+        if (project.name === activeProjectId){
+            project.counter += 1;
+            localStorage.setItem('projectArray', JSON.stringify(projectArray));
+        }
+    });
+}                                                                                       //CAN THESE TWO FUNCTIONS BE COMBINED TO AVOID REPETITION?
+
+const decrementProjectCounter = (activeProjectId) => {
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    projectArray.forEach(project => {
+        if (project.name === activeProjectId){
+            project.counter -= 1;
+            localStorage.setItem('projectArray', JSON.stringify(projectArray));
+        }
+    });
+}
+
 export const setActiveProject = (selectedProjectId) => {
-    console.log('active', selectedProjectId);
     const activeProject = document.getElementById(selectedProjectId);
     const projectButtons = document.querySelectorAll('.projectButton');
     projectButtons.forEach(project => {
@@ -53,7 +72,7 @@ export const addProject = () => {
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
         const projectTitle = projectInput.value;
         if (projectForm.checkValidity()){
-            projectArray.push({name: `${projectTitle}`});
+            projectArray.push({name: `${projectTitle}`, counter: 0});                           //ADD COUNTER ATTRIBUTE
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
             closeModal();
             displayProjects(projectTitle);
@@ -76,7 +95,8 @@ export const editTask = (editKey) => {
         const priority = document.querySelector("input[name='priority']:checked"); 
         event.preventDefault();   
         if (editForm.checkValidity()){
-            const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, 'test');
+            const oldTask = JSON.parse(localStorage.getItem(editKey));
+            const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, oldTask.project);
             localStorage.setItem(editKey, JSON.stringify(editTask));
             closeModal();
             fetchTasks();
@@ -114,5 +134,8 @@ class Task {
 } 
 
 export const deleteTask = (deleteKey) => {
+    const taskToDelete = JSON.parse(localStorage.getItem(deleteKey));
+    decrementProjectCounter(taskToDelete.project);
+    displayProjects(taskToDelete.project);
     localStorage.removeItem(deleteKey);
 }
