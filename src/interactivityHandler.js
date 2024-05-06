@@ -1,6 +1,6 @@
-import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects } from './displayHandler';
+import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
-import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, setActiveProject } from './taskHandler';
+import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject, positiveProjectCounter } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 /*The insidious problem of multiple event listeners being attached to the same element, leading to unpredictable 
@@ -10,11 +10,10 @@ seems to have stopped one of the issue, to do with input focus, but the key dupl
 export const interactivityHandler = () => {
     document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', function(e) {
-            switch(true) {
-                case (e.target.id === 'addNew'):                    //OPEN DIALOG MODAL TO ADD TASK/PROJECT
+            switch(true) { 
+                case (e.target.classList.contains('addNew')):       //OPEN DIALOG MODAL TO ADD TASK/PROJECT
                     openTaskModal();
                     addTask();
-                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'submitProject'):             //SUBMIT PROJECT
                     e.preventDefault();
@@ -25,7 +24,6 @@ export const interactivityHandler = () => {
                 case (e.target.classList.contains('erase')):        //ERASE TASK
                     const deleteKey = e.target.parentElement.getAttribute('id');
                     deleteTask(deleteKey);
-                    fetchTasks();
                     break;
                 case (e.target.id === 'reset'):
                     resetDisplay();                                 //RESET TO DEFAULT VALUES
@@ -37,7 +35,6 @@ export const interactivityHandler = () => {
                     const editKey = e.target.parentElement.getAttribute('id');
                     openEditModal(editKey);
                     editTask(editKey);
-                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('completion')):   //CHECK TASK COMPLETION
                     const checkKey = e.target.parentElement.getAttribute('id');
@@ -61,8 +58,18 @@ export const interactivityHandler = () => {
                 case (e.target.classList.contains('projectButton')): //SELECT PROJECT / FILTER BY PROJECT
                     const selectedProject = e.target.id;
                     setActiveProject(selectedProject);
+                    console.log(positiveProjectCounter(selectedProject));
+                    if (positiveProjectCounter(selectedProject)){
+                        fetchTasks();
+                    } else {
+                        displayEmptyProjectOptions();
+                    }
+                    break;
+                case (e.target.id === 'deleteProject'):
+                    deleteProject();
+                    displayProjects();
+                    setActiveProject(undefined);
                     fetchTasks();
-                    // e.stopImmediatePropagation();
                     break;
                 case (e.target.id === 'all'):                       //SHOW ALL TASKS
                     setActiveProject(undefined);

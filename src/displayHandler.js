@@ -14,7 +14,6 @@ export const fetchTasks = () => {
     if (activeProject !== null) {
         selectedProjectId = activeProject.id;
     }
-    content.textContent = '';
     const sortingArray = [];
     for (let i = 0; i < localStorage.length; i++) {
         const currentKey = localStorage.key(i);
@@ -23,7 +22,7 @@ export const fetchTasks = () => {
         if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
         } else if (selectedProjectId === undefined){
-            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
+            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));       //REDUNDANCY?
         } else if (parsedTask.project === selectedProjectId){
             sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
         }
@@ -39,6 +38,7 @@ export const fetchTasks = () => {
 }
 
 const displayTasks = (sortingArray) => {
+    content.textContent = '';
     sortingArray.forEach(object => {
         if (object.key !== 'firstSetup' && object.key !== 'projectArray') {
                 const container = document.createElement('div');
@@ -181,4 +181,18 @@ export const displayProjects = (newProject) => {
         }
         wrapper.appendChild(projectName);
     });
+}
+
+export const displayEmptyProjectOptions = () => {
+    content.textContent = '';
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('emptyProjCont');
+    const addTaskButton = document.createElement('button');
+    addTaskButton.classList.add('addNew');
+    addTaskButton.textContent = 'Add task';
+    const deleteProjectButton = document.createElement('button');
+    deleteProjectButton.setAttribute('id', 'deleteProject');
+    deleteProjectButton.textContent = 'Delete project';
+    buttonContainer.append(addTaskButton, deleteProjectButton);
+    content.append(buttonContainer);
 }

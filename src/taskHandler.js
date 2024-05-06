@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchTasks, closeModal, displayProjects } from './displayHandler';
+import { fetchTasks, closeModal, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 
 export const addTask = () => {
     const title = document.getElementById('title');
@@ -35,10 +35,16 @@ export const addTask = () => {
 
 }
 
+export const positiveProjectCounter = (activeProjectId) => {
+    console.log(activeProjectId)
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    return projectArray.some(project => project.name === activeProjectId && project.counter > 0);  // the some() method returns true if any of the array elements match the specified condition
+}                                                                                                  
+
 const incrementProjectCounter = (activeProjectId) => {
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
     projectArray.forEach(project => {
-        if (project.name === activeProjectId){
+        if (project.name === activeProjectId){                                          //
             project.counter += 1;
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
         }
@@ -47,7 +53,7 @@ const incrementProjectCounter = (activeProjectId) => {
 
 const decrementProjectCounter = (activeProjectId) => {
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
-    projectArray.forEach(project => {
+    projectArray.forEach(project => {                                                   //
         if (project.name === activeProjectId){
             project.counter -= 1;
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
@@ -82,6 +88,13 @@ export const addProject = () => {
         }
 }
 
+export const deleteProject = () => {
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'));
+    const activeProject = document.querySelector('.activeProject'); 
+    const updatedProjectArray = projectArray.filter(project => project.name !== activeProject.id);                                               
+    localStorage.setItem('projectArray', JSON.stringify(updatedProjectArray));
+}
+
 export const editTask = (editKey) => {
     const titleEdit = document.getElementById('editTitle');
     const detailsEdit = document.getElementById('editDetails');
@@ -107,7 +120,6 @@ export const editTask = (editKey) => {
 
     //Removing the eventListener after the code has been run ensures that there will only ever be one active at any given time    
     
-        // event.stopImmediatePropagation();
         submitEdit.removeEventListener('click', handleEdit);
     };
     submitEdit.addEventListener('click', handleEdit);
@@ -135,7 +147,12 @@ class Task {
 
 export const deleteTask = (deleteKey) => {
     const taskToDelete = JSON.parse(localStorage.getItem(deleteKey));
-    decrementProjectCounter(taskToDelete.project);
-    displayProjects(taskToDelete.project);
     localStorage.removeItem(deleteKey);
+    decrementProjectCounter(taskToDelete.project);
+    if (positiveProjectCounter(taskToDelete.project)) {
+        fetchTasks();
+    } else {
+        displayEmptyProjectOptions();
+    }
+    displayProjects(taskToDelete.project);
 }

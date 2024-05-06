@@ -365,3 +365,10 @@ form {
     width: 70px;
     margin-top: 30px;
 }
+
+.emptyProjCont {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    gap: 50px;
+    justify-content: center;
+}
