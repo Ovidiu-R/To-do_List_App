@@ -172,14 +172,20 @@ export const displayProjects = (newProject) => {
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
     wrapper.textContent = "";
     projectArray.forEach(project => {
+        const projectDiv = document.createElement('div');
+        projectDiv.classList.add('projectDiv');
+        const projectCounter = document.createElement('div');
+        projectCounter.classList.add('projectCounter');
+        projectCounter.textContent = project.counter;
         const projectName = document.createElement('button');
         projectName.setAttribute('id', `${project.name}`);
-        projectName.textContent = `(${project.counter})`+ project.name;
+        projectName.textContent = project.name;
         projectName.classList.add('projectButton');
         if (project.name === newProject) {
             projectName.classList.add('activeProject');
         }
-        wrapper.appendChild(projectName);
+        projectDiv.append(projectCounter, projectName);
+        wrapper.appendChild(projectDiv);
     });
 }
 

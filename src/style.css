@@ -78,7 +78,7 @@ li {
 
 #projectWrapper {
     height: 350px;
-    width: 191px;
+    /* width: 191px; */
     margin-left: 80px;
     padding-right: 20px;
     display: grid;
@@ -90,13 +90,24 @@ li {
 
 .projectButton {
     height: 50px;
-    width: 200px;
+    /* width: 200px; */
     background-color: transparent;
     border: none;
     outline: none;
     font-size: 25px;
     text-align: left;
     border-bottom: 1px solid transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.projectButton::before {
+    content: "";
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    left: -40px;
+    z-index: 991;
 }
 
 .projectButton:hover{
@@ -371,4 +382,20 @@ form {
     grid-template-columns: 200px 200px;
     gap: 50px;
     justify-content: center;
+}
+
+.projectDiv {
+    display: grid;
+    grid-template-columns: 10px 190px;
+    align-items: center;
+    gap: 10px;
+}
+
+.projectCounter {
+    height: 16px;
+    width: 16px;
+    font-size: 14px;
+    border-radius: 50%;
+    background-color: lightgoldenrodyellow;
+    text-align: center;
 }
