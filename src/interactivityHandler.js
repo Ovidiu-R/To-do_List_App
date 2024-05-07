@@ -75,11 +75,7 @@ export const interactivityHandler = () => {
                     setActiveProject(undefined);
                     displayTasks(sortByDate(fetchTasks()));
                     break;
-                // case (e.target.id === 'all'):                       //SHOW ALL TASKS
-                //     // setActiveProject(undefined);
-                //     fetchTasks();
-                //     break;
-                case (e.target.classList.contains('filterButtons')):    //FILTER BY DATE
+                case (e.target.classList.contains('filterButtons')):    //SWITCH BETWEEN SHOWING ALL AND FILTERING BY DATE
                     const buttonId = e.target.id;
                     setActiveDateFilter(buttonId);
                     setActiveProject(undefined);

@@ -1,4 +1,3 @@
-// import { parseISO, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 import { closeModal, displayTasks, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 
@@ -6,12 +5,11 @@ export const addTask = () => {
     const title = document.getElementById('title');
     const details = document.getElementById('details');
     const date = document.getElementById('date');
-    const submit = document.getElementById('submit');
-    const form = document.getElementById('newTaskForm');
-    
+    const submit = document.getElementById('submit');                           //This function could do with refactoring
+    const form = document.getElementById('newTaskForm');    
 
     const handleNewSubmission = (event) => {
-        const activeProject = document.querySelector('.activeProject');         //The activeProject button must be accessed within the confines of the 
+        const activeProject = document.querySelector('.activeProject');   
         let activeProjectId = undefined;
         if (activeProject !== null) {
             activeProjectId = activeProject.id;
@@ -24,7 +22,19 @@ export const addTask = () => {
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
             const taskArray = fetchTasks(activeProjectId);
-            const sortedArray = sortByDate(taskArray);
+            const dailyTasks = filterByDate(taskArray, 'day');
+            const weeklyTasks = filterByDate(taskArray, 'week');
+            let sortedArray = sortByDate(taskArray);
+            if (!activeProject){
+                if (dailyTasks.some(task => task.key === taskKey)){
+                    sortedArray = sortByDate(dailyTasks);
+                    setActiveDateFilter('day');
+                } else if (weeklyTasks.some(task => task.key === taskKey)){
+                    sortedArray = sortByDate(weeklyTasks);
+                    setActiveDateFilter('week');
+                }
+            }
+            
             displayTasks(sortedArray);
             incrementProjectCounter(activeProjectId);
             displayProjects(activeProjectId);
@@ -65,23 +75,35 @@ export const fetchTasks = () => {
 }
 
 export const filterByDate = (taskArray, filterId) => {
-    console.log(taskArray, filterId);
     const currentDate = new Date();
     var normalisedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     if (filterId === 'day'){
         const dailyTasks = taskArray.filter(task => {
             const taskDeadline = new Date(task.deadline);
             const normalisedTaskDeadline = new Date(taskDeadline.getFullYear(), taskDeadline.getMonth(), taskDeadline.getDate());
-            console.log(taskDeadline, normalisedCurrentDate);
             return (normalisedTaskDeadline.getFullYear() === normalisedCurrentDate.getFullYear() &&
                     normalisedTaskDeadline.getMonth() === normalisedCurrentDate.getMonth() &&
                     normalisedTaskDeadline.getDate() === normalisedCurrentDate.getDate()     
             );
         });
         return dailyTasks;
-    // } else if (filterId === 'week'){
-
-    // }
+    } else if (filterId === 'week'){
+        const dayOfWeek = currentDate.getDay();
+        const weekStart = currentDate.getDate() - dayOfWeek;
+        const weekEnd = weekStart + 6;
+        const weeklyTasks = taskArray.filter(task => {
+            const taskDeadline = new Date(task.deadline);
+            const normalisedTaskDeadline = new Date(taskDeadline.getFullYear(), taskDeadline.getMonth(), taskDeadline.getDate());
+            console.log(`${weekStart} <= ${normalisedTaskDeadline.getDate()} <= ${weekEnd}`);
+            return (normalisedTaskDeadline.getFullYear() === normalisedCurrentDate.getFullYear() &&
+                    normalisedTaskDeadline.getMonth() === normalisedCurrentDate.getMonth() &&
+                    normalisedTaskDeadline.getDate() >= weekStart &&
+                    normalisedTaskDeadline.getDate() <= weekEnd    
+                    
+            )
+        });
+        return weeklyTasks;
+    }
 
 }
 
