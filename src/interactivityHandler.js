@@ -1,6 +1,6 @@
-import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
+import { openTaskModal, openEditModal, closeModal, displayTasks , viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
-import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
+import { addTask, editTask, fetchTasks, sortByDate, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
 import { positiveProjectCounter, setActiveDateFilter } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
@@ -19,7 +19,7 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'submitProject'):             //SUBMIT PROJECT
                     e.preventDefault();
                     addProject();
-                    fetchTasks();
+                    displayTasks(sortByDate(fetchTasks()));
                     e.stopImmediatePropagation();
                     break;
                 case (e.target.classList.contains('erase')):        //ERASE TASK
@@ -29,8 +29,7 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'reset'):
                     resetDisplay();                                 //RESET TO DEFAULT VALUES
                     initialiseLocalStorage();
-                    fetchTasks();
-                    displayProjects();
+                    displayTasks(sortByDate(fetchTasks()));
                     break;
                 case (e.target.classList.contains('edit')):         //EDIT TASK
                     const editKey = e.target.parentElement.getAttribute('id');
@@ -64,7 +63,7 @@ export const interactivityHandler = () => {
                     setActiveProject(selectedProject);
                     console.log(positiveProjectCounter(selectedProject));
                     if (positiveProjectCounter(selectedProject)){
-                        fetchTasks();
+                        displayTasks(sortByDate(fetchTasks()));
                     } else {
                         displayEmptyProjectOptions();
                     }
@@ -74,7 +73,7 @@ export const interactivityHandler = () => {
                     deleteProject();
                     displayProjects();
                     setActiveProject(undefined);
-                    fetchTasks();
+                    displayTasks(sortByDate(fetchTasks()));
                     break;
                 // case (e.target.id === 'all'):                       //SHOW ALL TASKS
                 //     // setActiveProject(undefined);
@@ -84,7 +83,7 @@ export const interactivityHandler = () => {
                     const buttonId = e.target.id;
                     setActiveDateFilter(buttonId);
                     setActiveProject(undefined);
-                    fetchTasks();
+                    displayTasks(sortByDate(fetchTasks()));
                     break;
                 
 

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchTasks, closeModal, displayProjects, displayEmptyProjectOptions } from './displayHandler';
+import { closeModal, displayTasks, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 
 export const addTask = () => {
     const title = document.getElementById('title');
@@ -22,7 +22,9 @@ export const addTask = () => {
             const taskKey = uuidv4();
             localStorage.setItem(taskKey, JSON.stringify(newTask));
             closeModal();
-            fetchTasks(activeProjectId);
+            const taskArray = fetchTasks(activeProjectId);
+            const sortedArray = sortByDate(taskArray);
+            displayTasks(sortedArray);
             incrementProjectCounter(activeProjectId);
             displayProjects(activeProjectId);
         } else {
@@ -33,6 +35,43 @@ export const addTask = () => {
     }
     submit.addEventListener('click', handleNewSubmission); 
 
+}
+
+export const fetchTasks = () => {
+    const activeProject = document.querySelector('.activeProject');         //fetchTasks used to take as a parameter the projectId of the selected project button and, comparing
+    let selectedProjectId = undefined;                                      //it to the parsedTask.project, filter the right tasks when the function is called. 
+    if (activeProject !== null) {
+        selectedProjectId = activeProject.id;
+    }
+    const sortingArray = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const currentKey = localStorage.key(i);
+        const value = localStorage.getItem(currentKey);
+        const parsedTask = JSON.parse(value);
+        if (currentKey === 'firstSetup') {
+            sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
+        } else if (selectedProjectId === undefined){
+            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));       //REDUNDANCY?
+        } else if (parsedTask.project === selectedProjectId){
+            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
+        }
+    }
+    return sortingArray;
+   
+
+}
+
+// export const filterByDate = () => {
+
+// }
+
+export const sortByDate = (sortingArray) => {
+    sortingArray.sort(function(a, b) {
+        let dateA = new Date(a.deadline);
+        let dateB = new Date(b.deadline);
+        return (dateA - dateB);
+    }); 
+    return sortingArray;
 }
 
 export const setActiveDateFilter = (dateFilterId) => {
@@ -123,7 +162,10 @@ export const editTask = (editKey) => {
             const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, oldTask.project);
             localStorage.setItem(editKey, JSON.stringify(editTask));
             closeModal();
-            fetchTasks();
+            // fetchTasks();
+            const taskArray = fetchTasks();
+            const sortedArray = sortByDate(taskArray);
+            displayTasks(sortedArray);
         } else {
             editForm.reportValidity();
             console.log('INVALID');
@@ -161,7 +203,9 @@ export const deleteTask = (deleteKey) => {
     localStorage.removeItem(deleteKey);
     decrementProjectCounter(taskToDelete.project);
     if (positiveProjectCounter(taskToDelete.project)) {
-        fetchTasks();
+        const taskArray = fetchTasks();
+        const sortedArray = sortByDate(taskArray);
+        displayTasks(sortedArray);
     } else {
         displayEmptyProjectOptions();
     }

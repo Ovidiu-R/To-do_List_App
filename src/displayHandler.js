@@ -8,37 +8,9 @@ const details = document.querySelectorAll('.details');
 const date = document.querySelectorAll('.date');
 const radioButtons = document.querySelectorAll("input[name='priority']");
 
-export const fetchTasks = () => {
-    const activeProject = document.querySelector('.activeProject');         //fetchTasks used to take as a parameter the projectId of the selected project button and, comparing
-    let selectedProjectId = undefined;                                      //it to the parsedTask.project, filter the right tasks when the function is called. 
-    if (activeProject !== null) {
-        selectedProjectId = activeProject.id;
-    }
-    const sortingArray = [];
-    for (let i = 0; i < localStorage.length; i++) {
-        const currentKey = localStorage.key(i);
-        const value = localStorage.getItem(currentKey);
-        const parsedTask = JSON.parse(value);
-        if (currentKey === 'firstSetup') {
-            sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
-        } else if (selectedProjectId === undefined){
-            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));       //REDUNDANCY?
-        } else if (parsedTask.project === selectedProjectId){
-            sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
-        }
-    }
-    
-    sortingArray.sort(function(a, b) {
-        let dateA = new Date(a.deadline);
-        let dateB = new Date(b.deadline);
-        return (dateA - dateB);
-    }); 
-    displayTasks(sortingArray);
-    console.log(sortingArray);
 
-}
 
-const displayTasks = (sortingArray) => {
+export const displayTasks = (sortingArray) => {
     content.textContent = '';
     sortingArray.forEach(object => {
         if (object.key !== 'firstSetup' && object.key !== 'projectArray') {
