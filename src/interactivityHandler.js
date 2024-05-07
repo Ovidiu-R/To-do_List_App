@@ -1,6 +1,7 @@
 import { openTaskModal, openEditModal, closeModal, fetchTasks, viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
-import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject, positiveProjectCounter } from './taskHandler';
+import { addTask, editTask, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
+import { positiveProjectCounter, setActiveDateFilter } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 /*The insidious problem of multiple event listeners being attached to the same element, leading to unpredictable 
@@ -47,6 +48,9 @@ export const interactivityHandler = () => {
                 case (e.target.id === 'closeDetails'):              //CLOSE DETAILS
                     closeModal();
                     break;
+                case (e.target.classList.contains('modalCloseButton')):
+                    closeModal();
+                    break;
                 case (e.target.id === 'taskButton'):                //OPEN TASK FORM
                     openTaskForm();
                     e.stopImmediatePropagation();
@@ -64,17 +68,25 @@ export const interactivityHandler = () => {
                     } else {
                         displayEmptyProjectOptions();
                     }
+                    setActiveDateFilter(undefined);
                     break;
-                case (e.target.id === 'deleteProject'):
+                case (e.target.id === 'deleteProject'):             //DELETE PROJECT
                     deleteProject();
                     displayProjects();
                     setActiveProject(undefined);
                     fetchTasks();
                     break;
-                case (e.target.id === 'all'):                       //SHOW ALL TASKS
+                // case (e.target.id === 'all'):                       //SHOW ALL TASKS
+                //     // setActiveProject(undefined);
+                //     fetchTasks();
+                //     break;
+                case (e.target.classList.contains('filterButtons')):
+                    const buttonId = e.target.id;
+                    setActiveDateFilter(buttonId);
                     setActiveProject(undefined);
                     fetchTasks();
                     break;
+                
 
             }
         });

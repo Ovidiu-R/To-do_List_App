@@ -35,6 +35,17 @@ export const addTask = () => {
 
 }
 
+export const setActiveDateFilter = (dateFilterId) => {
+    const activeFilter = document.getElementById(dateFilterId);
+    const filterButtons = document.querySelectorAll('.filterButtons');
+    filterButtons.forEach(button => {
+        button.classList.remove('activeDateFilter');
+    });
+    if (dateFilterId !== undefined) {
+        activeFilter.classList.add('activeDateFilter');
+    }
+}
+
 export const positiveProjectCounter = (activeProjectId) => {
     console.log(activeProjectId)
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));

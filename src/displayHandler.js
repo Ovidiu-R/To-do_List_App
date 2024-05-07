@@ -10,7 +10,7 @@ const radioButtons = document.querySelectorAll("input[name='priority']");
 
 export const fetchTasks = () => {
     const activeProject = document.querySelector('.activeProject');         //fetchTasks used to take as a parameter the projectId of the selected project button and, comparing
-    let selectedProjectId = undefined;                                      //it to the parsedTask.project, silter the right tasks when the function is called. 
+    let selectedProjectId = undefined;                                      //it to the parsedTask.project, filter the right tasks when the function is called. 
     if (activeProject !== null) {
         selectedProjectId = activeProject.id;
     }
@@ -27,6 +27,7 @@ export const fetchTasks = () => {
             sortingArray.push(Object.assign(parsedTask, {key: currentKey}));
         }
     }
+    
     sortingArray.sort(function(a, b) {
         let dateA = new Date(a.deadline);
         let dateB = new Date(b.deadline);

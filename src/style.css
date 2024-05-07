@@ -115,9 +115,6 @@ li {
 
 }
 
-/* .projectButton:focus{
-    border-bottom: 1px solid black;
-} */
 
 .activeProject {
     border-bottom: 1px solid black;
@@ -163,9 +160,20 @@ dialog::backdrop {
     backdrop-filter: blur(5px);
 }
 .modalHeader {
+    padding: 0;
     height: 50px;
     background-color: #17252A;
     display: grid;
+    grid-template-columns: 1fr 20px;
+}
+.modalCloseButton {
+    display: grid;
+    height: 17px;
+    width: 17px;
+    background-color: orangered;
+    font-size: 15px;
+    margin-top: 3px;
+    line-height: 9px;               /*Cannot get button text vertically centered unless I use line-height*/
 }
 .modalHeader h1 {
     font-size: 32px;
@@ -240,6 +248,11 @@ li>button:hover {
 }
 li>button:focus {
     outline: none;
+}
+
+.activeDateFilter {
+    color: gold;
+    text-shadow: 0 0 20px gold;
 }
 
 #addNew {
