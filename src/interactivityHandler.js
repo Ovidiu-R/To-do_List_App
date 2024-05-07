@@ -1,7 +1,7 @@
 import { openTaskModal, openEditModal, closeModal, displayTasks , viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
 import { addTask, editTask, fetchTasks, sortByDate, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
-import { positiveProjectCounter, setActiveDateFilter } from './taskHandler';
+import { positiveProjectCounter, setActiveDateFilter, filterByDate } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
 
 /*The insidious problem of multiple event listeners being attached to the same element, leading to unpredictable 
@@ -79,11 +79,15 @@ export const interactivityHandler = () => {
                 //     // setActiveProject(undefined);
                 //     fetchTasks();
                 //     break;
-                case (e.target.classList.contains('filterButtons')):
+                case (e.target.classList.contains('filterButtons')):    //FILTER BY DATE
                     const buttonId = e.target.id;
                     setActiveDateFilter(buttonId);
                     setActiveProject(undefined);
-                    displayTasks(sortByDate(fetchTasks()));
+                    if (buttonId === 'all'){
+                        displayTasks(sortByDate(fetchTasks()));
+                    } else {
+                        displayTasks(sortByDate(filterByDate(fetchTasks(), buttonId)));
+                    } 
                     break;
                 
 

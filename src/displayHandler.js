@@ -1,4 +1,3 @@
-// import { parseISO, format } from 'date-fns';
 const newModal = document.getElementById('taskModal');
 const editModal = document.getElementById('editModal');
 const detailModal = document.getElementById('detailModal');

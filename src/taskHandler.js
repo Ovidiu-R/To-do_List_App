@@ -1,3 +1,4 @@
+// import { parseISO, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 import { closeModal, displayTasks, displayProjects, displayEmptyProjectOptions } from './displayHandler';
 
@@ -48,7 +49,9 @@ export const fetchTasks = () => {
         const currentKey = localStorage.key(i);
         const value = localStorage.getItem(currentKey);
         const parsedTask = JSON.parse(value);
-        if (currentKey === 'firstSetup') {
+        if (currentKey === 'projectArray'){
+            console.log('ignore this');
+        } else if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
         } else if (selectedProjectId === undefined){
             sortingArray.push(Object.assign(parsedTask, {key: currentKey}));       //REDUNDANCY?
@@ -61,9 +64,26 @@ export const fetchTasks = () => {
 
 }
 
-// export const filterByDate = () => {
+export const filterByDate = (taskArray, filterId) => {
+    console.log(taskArray, filterId);
+    const currentDate = new Date();
+    var normalisedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    if (filterId === 'day'){
+        const dailyTasks = taskArray.filter(task => {
+            const taskDeadline = new Date(task.deadline);
+            const normalisedTaskDeadline = new Date(taskDeadline.getFullYear(), taskDeadline.getMonth(), taskDeadline.getDate());
+            console.log(taskDeadline, normalisedCurrentDate);
+            return (normalisedTaskDeadline.getFullYear() === normalisedCurrentDate.getFullYear() &&
+                    normalisedTaskDeadline.getMonth() === normalisedCurrentDate.getMonth() &&
+                    normalisedTaskDeadline.getDate() === normalisedCurrentDate.getDate()     
+            );
+        });
+        return dailyTasks;
+    // } else if (filterId === 'week'){
 
-// }
+    // }
+
+}
 
 export const sortByDate = (sortingArray) => {
     sortingArray.sort(function(a, b) {
