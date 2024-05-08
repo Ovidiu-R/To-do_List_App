@@ -1,5 +1,5 @@
 import { openTaskModal, openEditModal, closeModal, displayTasks , viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
-import { resetDisplay, openTaskForm, openProjectForm } from './displayHandler';
+import { resetLocalStorage, openTaskForm, openProjectForm } from './displayHandler';
 import { addTask, editTask, fetchTasks, sortByDate, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
 import { positiveProjectCounter, setActiveDateFilter, filterByDate } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
@@ -27,9 +27,14 @@ export const interactivityHandler = () => {
                     deleteTask(deleteKey);
                     break;
                 case (e.target.id === 'reset'):
-                    resetDisplay();                                 //RESET TO DEFAULT VALUES
+                    resetLocalStorage();        
                     initialiseLocalStorage();
+                    setActiveProject(undefined);
+                    displayProjects();
+                    setActiveDateFilter('all');
                     displayTasks(sortByDate(fetchTasks()));
+                    // e.stopImmediatePropagation();
+
                     break;
                 case (e.target.classList.contains('edit')):         //EDIT TASK
                     const editKey = e.target.parentElement.getAttribute('id');
@@ -61,7 +66,6 @@ export const interactivityHandler = () => {
                 case (e.target.classList.contains('projectButton')): //SELECT PROJECT / FILTER BY PROJECT
                     const selectedProject = e.target.id;
                     setActiveProject(selectedProject);
-                    console.log(positiveProjectCounter(selectedProject));
                     if (positiveProjectCounter(selectedProject)){
                         displayTasks(sortByDate(fetchTasks()));
                     } else {

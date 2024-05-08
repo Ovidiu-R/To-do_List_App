@@ -60,7 +60,7 @@ export const fetchTasks = () => {
         const value = localStorage.getItem(currentKey);
         const parsedTask = JSON.parse(value);
         if (currentKey === 'projectArray'){
-            console.log('ignore this');
+            console.log('');
         } else if (currentKey === 'firstSetup') {
             sortingArray.push({key: 'firstSetup', deadline: '1999-01-01'});
         } else if (selectedProjectId === undefined){
@@ -94,7 +94,6 @@ export const filterByDate = (taskArray, filterId) => {
         const weeklyTasks = taskArray.filter(task => {
             const taskDeadline = new Date(task.deadline);
             const normalisedTaskDeadline = new Date(taskDeadline.getFullYear(), taskDeadline.getMonth(), taskDeadline.getDate());
-            console.log(`${weekStart} <= ${normalisedTaskDeadline.getDate()} <= ${weekEnd}`);
             return (normalisedTaskDeadline.getFullYear() === normalisedCurrentDate.getFullYear() &&
                     normalisedTaskDeadline.getMonth() === normalisedCurrentDate.getMonth() &&
                     normalisedTaskDeadline.getDate() >= weekStart &&
@@ -124,11 +123,11 @@ export const setActiveDateFilter = (dateFilterId) => {
     });
     if (dateFilterId !== undefined) {
         activeFilter.classList.add('activeDateFilter');
+        // setActiveProject(undefined);
     }
 }
 
 export const positiveProjectCounter = (activeProjectId) => {
-    console.log(activeProjectId)
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
     return projectArray.some(project => project.name === activeProjectId && project.counter > 0);  // the some() method returns true if any of the array elements match the specified condition
 }                                                                                                  
@@ -154,13 +153,16 @@ const decrementProjectCounter = (activeProjectId) => {
 }
 
 export const setActiveProject = (selectedProjectId) => {
-    const activeProject = document.getElementById(selectedProjectId);
+    console.log(selectedProjectId);
+    // const activeProject = document.getElementById(selectedProjectId);
     const projectButtons = document.querySelectorAll('.projectButton');
     projectButtons.forEach(project => {
         project.classList.remove('activeProject');
     });
     if (selectedProjectId !== undefined) {
+        const activeProject = document.getElementById(selectedProjectId);
         activeProject.classList.add('activeProject');
+        // setActiveDateFilter(undefined);
     }
 }
 
@@ -173,7 +175,8 @@ export const addProject = () => {
             projectArray.push({name: `${projectTitle}`, counter: 0});                           //ADD COUNTER ATTRIBUTE
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
             closeModal();
-            displayProjects(projectTitle);
+            displayProjects();
+            setActiveProject(projectTitle);
 
         } else {
             projectForm.reportValidity();
@@ -248,8 +251,11 @@ export const deleteTask = (deleteKey) => {
         const taskArray = fetchTasks();
         const sortedArray = sortByDate(taskArray);
         displayTasks(sortedArray);
+        displayProjects();
     } else {
         displayEmptyProjectOptions();
+        displayProjects();
+        setActiveProject(taskToDelete.project);
     }
-    displayProjects(taskToDelete.project);
+    
 }

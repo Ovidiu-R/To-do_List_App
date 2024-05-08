@@ -41,7 +41,7 @@ export const displayTasks = (sortingArray) => {
     });
 }
 
-export const resetDisplay = () => {
+export const resetLocalStorage = () => {
     localStorage.clear();
 }
 
@@ -61,7 +61,6 @@ export const openTaskForm = () => {
     taskButton.classList.add('selected');
     projectForm.style.display = 'none';
     taskForm.style.display = 'block';
-    console.log('task form selected');
 }
 
 export const openProjectForm = () => {
@@ -73,7 +72,6 @@ export const openProjectForm = () => {
     projectButton.classList.add('selected');
     taskForm.style.display = 'none';
     projectForm.style.display = 'block';
-    console.log('project form selected');
 }
 
 export const openEditModal = (editKey) => {
@@ -139,7 +137,7 @@ export const closeModal = () => {
 
 }
 
-export const displayProjects = (newProject) => {
+export const displayProjects = () => {
     const wrapper = document.getElementById('projectWrapper');
     const projectArray = JSON.parse(localStorage.getItem('projectArray'));
     wrapper.textContent = "";
@@ -153,9 +151,9 @@ export const displayProjects = (newProject) => {
         projectName.setAttribute('id', `${project.name}`);
         projectName.textContent = project.name;
         projectName.classList.add('projectButton');
-        if (project.name === newProject) {
-            projectName.classList.add('activeProject');
-        }
+        // if (project.name === newProject) {
+        //     projectName.classList.add('activeProject');
+        // }
         projectDiv.append(projectCounter, projectName);
         wrapper.appendChild(projectDiv);
     });
