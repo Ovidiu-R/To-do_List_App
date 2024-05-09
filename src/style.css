@@ -79,7 +79,7 @@ li {
 #projectWrapper {
     height: 350px;
     /* width: 191px; */
-    margin-left: 80px;
+    margin-left: 60px;
     padding-right: 20px;
     display: grid;
     grid-template-rows: repeat(auto-fit, 50px);
@@ -141,7 +141,7 @@ li {
 }
 
 .task:hover{
-    box-shadow: 0px 0px 3px 1px #000000;;
+    box-shadow: 0px 0px 3px 1px #000000;
 }
 
 dialog {
@@ -263,13 +263,28 @@ li>button:focus {
     background-position: center center;
     border: none;
     background-color: transparent;
-    margin-top: 30px;
-    margin-left: 150px;
 }
 
-/* #reset {
-    margin-top: -50px;
-} */
+#reset {
+    font-size: 17px;
+    width: 70px;
+    background-color: red;
+    color: white;
+}
+
+#reset:hover {
+    box-shadow: 0px 0px 50px 10px red;
+    text-shadow: 0 0 50px red;
+}
+
+.bottomButtons {
+    display: grid;
+    grid-template-columns: 70px 50px;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 50px;
+    gap: 30px;
+}
 
 #addNew:hover {
     filter: invert(78%) sepia(50%) saturate(2543%) hue-rotate(3deg) brightness(109%) contrast(105%);
@@ -401,7 +416,8 @@ form {
     display: grid;
     grid-template-columns: 10px 190px;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+
 }
 
 .projectCounter {
@@ -411,4 +427,6 @@ form {
     border-radius: 50%;
     background-color: lightgoldenrodyellow;
     text-align: center;
+    padding-top: 1px;
+    margin-bottom: 2px;
 }
