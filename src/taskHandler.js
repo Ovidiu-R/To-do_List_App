@@ -38,6 +38,7 @@ export const addTask = () => {
             displayTasks(sortedArray);
             incrementProjectCounter(activeProjectId);
             displayProjects(activeProjectId);
+            setActiveProject(activeProjectId);
         } else {
             form.reportValidity();
         }
@@ -102,6 +103,8 @@ export const filterByDate = (taskArray, filterId) => {
             )
         });
         return weeklyTasks;
+    } else {
+        return taskArray;
     }
 
 }
@@ -245,17 +248,44 @@ class Task {
 
 export const deleteTask = (deleteKey) => {
     const taskToDelete = JSON.parse(localStorage.getItem(deleteKey));
+    const activeDateFilter = document.querySelector('.activeDateFilter');
     localStorage.removeItem(deleteKey);
     decrementProjectCounter(taskToDelete.project);
-    if (positiveProjectCounter(taskToDelete.project)) {
-        const taskArray = fetchTasks();
-        const sortedArray = sortByDate(taskArray);
-        displayTasks(sortedArray);
-        displayProjects();
-    } else {
-        displayEmptyProjectOptions();
-        displayProjects();
-        setActiveProject(taskToDelete.project);
+    // if (positiveProjectCounter(taskToDelete.project)) {
+    //     const taskArray = fetchTasks();
+    //     const sortedArray = sortByDate(taskArray);
+    //     displayTasks(sortedArray);
+    //     displayProjects();
+    //     if (activeDateFilter === null){
+    //         setActiveProject(taskToDelete.project);
+    //     } 
+    // } else {
+    //     displayEmptyProjectOptions();
+    //     displayProjects();
+    //     setActiveDateFilter(undefined);
+    //     setActiveProject(taskToDelete.project);
+    // }
+    console.log(taskToDelete.project);
+    switch (true) {
+        case (taskToDelete.project === undefined):
+            console.log(activeDateFilter.id);
+            displayTasks(sortByDate(filterByDate(fetchTasks(), activeDateFilter.id)));
+            break;
+        case (positiveProjectCounter(taskToDelete.project)):
+            displayProjects();
+            if (activeDateFilter === null){
+                displayTasks(sortByDate(fetchTasks()));
+                setActiveProject(taskToDelete.project);
+            } else {
+                displayTasks(sortByDate(filterByDate(fetchTasks(), activeDateFilter.id)));
+            }
+            break;
+        case (true):
+            displayEmptyProjectOptions();
+            displayProjects();
+            setActiveDateFilter(undefined);
+            setActiveProject(taskToDelete.project);
+            break;
     }
     
 }

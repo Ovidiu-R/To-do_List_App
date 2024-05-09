@@ -8,7 +8,7 @@ export const initialiseLocalStorage = () => {
         const testTask1 = {
             title: 'Feed the cat!',
             details: 'Must feed Muffin by 9am otherwise she will tear the entire house apart.',
-            deadline: '2024-04-15',
+            deadline: '2024-05-09',
             priority: 'medium',
             completion: true,
             project: 'TestProject'
@@ -16,7 +16,7 @@ export const initialiseLocalStorage = () => {
         const testTask2 = {
             title: 'Shopping',
             details: 'Must buy milk, bread, sausages, eggs and honey for the wifey',
-            deadline: '2024-04-16',
+            deadline: '2024-05-09',
             priority: 'medium',
             completion: false,
             project: 'TestProject'
@@ -24,7 +24,7 @@ export const initialiseLocalStorage = () => {
         const testTask3 = {
             title: 'Pay council tax',
             details: 'Any delays will slap a fine on top of the amount due',
-            deadline: '2024-04-18',
+            deadline: '2024-05-10',
             priority: 'high',
             completion: true,
             project: 'Default'
@@ -32,7 +32,7 @@ export const initialiseLocalStorage = () => {
         const testTask4 = {
             title: 'Mega DnD session',
             details: 'Set aside 8 hours and acquire pelnty of snacks to keep me going',
-            deadline: '2024-04-19',
+            deadline: '2024-05-10',
             priority: 'medium',
             completion: false,
             project: 'Default'
