@@ -17,6 +17,7 @@
 
 body {
     height: 100vh;
+    /* position: absolute; */
 }
 
 header {
@@ -63,7 +64,7 @@ img {
 nav {
     background-color: var(--secondary-color);
     padding: 10px 10px 10px 20px;
-    max-height: 100vh - 120px;
+    height: 100vh;
 }
 
 ul {
@@ -125,7 +126,7 @@ li {
     display: grid;
     grid-template-rows: repeat(auto-fit, 60px);
     padding: 20px;
-    max-height: calc(100vh - 120px);
+    max-height: 100vh;
     overflow: auto;
 }
 
@@ -429,4 +430,41 @@ form {
     text-align: center;
     padding-top: 1px;
     margin-bottom: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        /* width: 100vw; */
+        grid-template-columns: 4fr 1fr;
+    }
+    h1{
+        font-size: 40px;
+    }
+    nav {
+        display: none;
+    }
+    .outerGrid {
+        display: grid;
+        grid-template-rows: 90px 1fr;
+        height: 100vh;
+    }
+    
+    .innerGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #content {
+        width: 100vw;
+        padding: none;
+    }
+    .task{
+        width: 90vw;
+        font-size: 12px;
+        grid-template-columns: 20px 1fr 45px 60px 30px 37px;
+        gap: 10px;
+    }
+    .task>button {
+        font-size: 13px;
+    }
+
 }

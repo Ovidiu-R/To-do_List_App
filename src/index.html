@@ -43,7 +43,7 @@
                 <button id="projectButton">Project</button>
             </nav>
             <div id="modalContent" class="modalContent">
-                <form id="newTaskForm" action="">
+                <form id="newTaskForm" name="newTaskForm" action="">
                     <input class="title" id="title" type="text" required placeholder="Task name...">
                     <textarea class="details" name="" id="details" cols="48" rows="8" placeholder="Details..."></textarea><br>
                     <p class="deadline" id="deadline">Deadline:</p>
@@ -67,7 +67,7 @@
                     </div>
                     <input class="submitButtons" type="submit" id="submit" name="AddTask">
                 </form>
-                <form action="" id="newProjectForm">
+                <form action="" id="newProjectForm" name="newProjectForm">
                     <input class="title" id="projectTitle" type="text" required placeholder="Project name...">
                     <input class="submitButtons" type="submit" id="submitProject" name="AddProject">
                 </form>
@@ -76,7 +76,7 @@
     </dialog>
 
     <dialog id="editModal" class="editModal">
-        <form id="editTaskForm" action="">
+        <form id="editTaskForm" name="editTaskForm" action="">
             <input class="title" id="editTitle" type="text" required placeholder="Task name...">
             <textarea class="details" name="" id="editDetails" cols="63" rows="8" placeholder="Details..."></textarea><br>
             <p class="deadline" id="editDeadline">Deadline:</p>

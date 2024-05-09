@@ -46,7 +46,7 @@ export const interactivityHandler = () => {
                     taskCompletionTrigger(checkKey);
                     break;
                 case (e.target.classList.contains('taskDetails')):  //VIEW TASK DETAILS
-                    const detailKey = e.target.parentElement.getAttribute('id');
+                    const detailKey = e.target.parentElement.id;
                     viewDetails(detailKey);
                     break;
                 case (e.target.id === 'closeDetails'):              //CLOSE DETAILS
