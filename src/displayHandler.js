@@ -151,9 +151,6 @@ export const displayProjects = () => {
         projectName.setAttribute('id', `${project.name}`);
         projectName.textContent = project.name;
         projectName.classList.add('projectButton');
-        // if (project.name === newProject) {
-        //     projectName.classList.add('activeProject');
-        // }
         projectDiv.append(projectCounter, projectName);
         wrapper.appendChild(projectDiv);
     });
@@ -171,4 +168,23 @@ export const displayEmptyProjectOptions = () => {
     deleteProjectButton.textContent = 'Delete project';
     buttonContainer.append(addTaskButton, deleteProjectButton);
     content.append(buttonContainer);
+}
+
+export const toggleMobileMenu = () => {
+    const navBar = document.getElementById('navBar');
+    if (navBar.style.display === 'block') {
+        navBar.style.display = 'none';
+    } else {
+        navBar.style.display = 'block';
+    }
+}
+
+export const handleResize = () => {
+    const viewportWidth = window.innerWidth;
+    const navBar = document.getElementById('navBar');
+    if (viewportWidth > 768) {
+        navBar.style.display = 'block';
+    } else {
+        navBar.style.display = 'none';
+    }
 }

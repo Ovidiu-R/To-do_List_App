@@ -42,12 +42,29 @@ h1 {
     background-image: url('../media/noun-checklist-6655190.svg');
     background-size: 100px 100px;
     background-position: center center;
+    background-repeat: no-repeat;
     filter: invert(89%) sepia(0%) saturate(944%) hue-rotate(206deg) brightness(110%) contrast(110%);
 }
 
-
-img {
+.mobileMenu {
+    display: none;
+    align-self: center;
+    border: none;
+    width: 50px;
     height: 50px;
+    background-image: url('../media/menu_icon.svg');
+    background-size: 70px 70px;
+    background-position: center -5px;
+    filter: invert(89%) sepia(0%) saturate(944%) hue-rotate(206deg) brightness(110%) contrast(110%);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.mobileMenu:hover {
+    background-image: url('../media/menu_icon_gold.svg');
+    background-color: transparent;
+    filter: none;
 }
 
 .outerGrid {
@@ -64,7 +81,7 @@ img {
 nav {
     background-color: var(--secondary-color);
     padding: 10px 10px 10px 20px;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 ul {
@@ -243,7 +260,7 @@ li>button {
     font-size: 40px;
     
 }
-li>button:hover {
+li>button:not(:nth-child(4)):hover {
     color: gold;
     text-shadow: 0 0 20px gold;
 }
@@ -266,7 +283,7 @@ li>button:focus {
     background-color: transparent;
 }
 
-#reset {
+/* #reset {
     font-size: 17px;
     width: 70px;
     background-color: red;
@@ -276,15 +293,16 @@ li>button:focus {
 #reset:hover {
     box-shadow: 0px 0px 50px 10px red;
     text-shadow: 0 0 50px red;
-}
+} */
 
 .bottomButtons {
     display: grid;
-    grid-template-columns: 70px 50px;
+    justify-content: center;
+    /* grid-template-columns: 70px 50px;
     align-items: center;
     margin-top: 30px;
     margin-left: 50px;
-    gap: 30px;
+    gap: 30px; */
 }
 
 #addNew:hover {
@@ -435,17 +453,86 @@ form {
 @media only screen and (max-width: 768px) {
     header {
         /* width: 100vw; */
-        grid-template-columns: 4fr 1fr;
+        grid-template-columns: 3fr 1fr;
+        justify-items: center;
     }
-    h1{
+    .logoContainer {
+       display: none;
+    }
+
+    .mobileMenu {
+        display: grid;
+    }
+
+    #navBar {
+        padding: 10px 10px 10px 10px;
+        /* height: 80vh; */
+        width: 20vw;
+        position: absolute;
+        top: 60;
+        right: 0;
+        text-align: center;
+    }
+
+    .filterButtons {
+        /* width: 150px; */
+        font-size: 25px;
+
+    }
+    #projects {
+        font-size: 25px;
+        margin-top: 40px;
+    }
+
+    ul {
+        margin-top: 20px;
+        list-style-type: none;
+    }
+    
+    li {
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    li>button {
+        height: 30px;
+        width: 120px;
+        border: none;
+        text-align: center;
+        background-color: transparent;  
         font-size: 40px;
+        
     }
-    nav {
-        display: none;
+    
+    #projectWrapper {
+        height: 350px;
+        /* width: 191px; */
+        margin-left: 5px;
+        padding-right: 5px;
+        grid-template-rows: repeat(auto-fit, 30px);
+        gap: 10px;
+    }
+    
+    .projectButton {
+        height: 30px;
+        width: 120px;
+        font-size: 20px;
+    }
+
+    .projectDiv {
+        display: grid;
+        grid-template-columns: 10px 190px;
+        align-items: center;
+        gap: 12px;
+    
+    }
+
+    h1{
+        font-size: 35px;
     }
     .outerGrid {
         display: grid;
-        grid-template-rows: 90px 1fr;
+        grid-template-rows: 60px 1fr;
         height: 100vh;
     }
     
@@ -454,17 +541,31 @@ form {
         grid-template-columns: 1fr;
     }
     #content {
-        width: 100vw;
+        /* width: 100vw; */
         padding: none;
     }
     .task{
-        width: 90vw;
+        width: 85vw;
         font-size: 12px;
         grid-template-columns: 20px 1fr 45px 60px 30px 37px;
         gap: 10px;
+        justify-self: center;
     }
     .task>button {
         font-size: 13px;
     }
-
+    .bottomButtons {
+        justify-self: center;
+        align-self: center;
+        margin-top: 30px;
+    }
+    .modalBody {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+    }
+    textarea {
+        width: 380px;
+        height: 120px;
+        display: block;
+    }
 }

@@ -1,5 +1,5 @@
 import { openTaskModal, openEditModal, closeModal, displayTasks , viewDetails, displayProjects, displayEmptyProjectOptions } from './displayHandler';
-import { resetLocalStorage, openTaskForm, openProjectForm } from './displayHandler';
+import { resetLocalStorage, openTaskForm, openProjectForm, toggleMobileMenu, handleResize } from './displayHandler';
 import { addTask, editTask, fetchTasks, sortByDate, taskCompletionTrigger, deleteTask, addProject, deleteProject, setActiveProject } from './taskHandler';
 import { positiveProjectCounter, setActiveDateFilter, filterByDate } from './taskHandler';
 import { initialiseLocalStorage } from './initialiseLocalStorage';
@@ -90,6 +90,10 @@ export const interactivityHandler = () => {
                         displayTasks(sortByDate(filterByDate(fetchTasks(), buttonId)));
                     } 
                     break;
+                case (e.target.classList.contains('mobileMenu')): 
+                    toggleMobileMenu();
+                    break;
+
                 
 
             }
@@ -99,5 +103,6 @@ export const interactivityHandler = () => {
                 closeModal();            
             }
         });
+        window.addEventListener('resize', handleResize);            //TOGGLE NAV MENU VISIBILITY WHEN RESIZING SCREEN UP OR DOWN
     });
 }

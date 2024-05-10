@@ -126,7 +126,6 @@ export const setActiveDateFilter = (dateFilterId) => {
     });
     if (dateFilterId !== undefined) {
         activeFilter.classList.add('activeDateFilter');
-        // setActiveProject(undefined);
     }
 }
 
@@ -157,7 +156,6 @@ const decrementProjectCounter = (activeProjectId) => {
 
 export const setActiveProject = (selectedProjectId) => {
     console.log(selectedProjectId);
-    // const activeProject = document.getElementById(selectedProjectId);
     const projectButtons = document.querySelectorAll('.projectButton');
     projectButtons.forEach(project => {
         project.classList.remove('activeProject');
@@ -165,7 +163,6 @@ export const setActiveProject = (selectedProjectId) => {
     if (selectedProjectId !== undefined) {
         const activeProject = document.getElementById(selectedProjectId);
         activeProject.classList.add('activeProject');
-        // setActiveDateFilter(undefined);
     }
 }
 
@@ -180,7 +177,6 @@ export const addProject = () => {
             closeModal();
             displayProjects();
             setActiveProject(projectTitle);
-
         } else {
             projectForm.reportValidity();
         }
@@ -210,7 +206,6 @@ export const editTask = (editKey) => {
             const editTask = new Task(titleEdit.value, detailsEdit.value, dateEdit.value, priority.value, false, oldTask.project);
             localStorage.setItem(editKey, JSON.stringify(editTask));
             closeModal();
-            // fetchTasks();
             const taskArray = fetchTasks();
             const sortedArray = sortByDate(taskArray);
             displayTasks(sortedArray);
@@ -231,7 +226,6 @@ export const taskCompletionTrigger = (checkKey) => {
     const taskCompletion = !parsedTask.completion;
     const triggeredTask = new Task(parsedTask.title, parsedTask.details, parsedTask.deadline, parsedTask.priority, taskCompletion, parsedTask.project);
     localStorage.setItem(checkKey, JSON.stringify(triggeredTask));
-    // fetchTasks();
 }
 
 class Task {
@@ -251,21 +245,6 @@ export const deleteTask = (deleteKey) => {
     const activeDateFilter = document.querySelector('.activeDateFilter');
     localStorage.removeItem(deleteKey);
     decrementProjectCounter(taskToDelete.project);
-    // if (positiveProjectCounter(taskToDelete.project)) {
-    //     const taskArray = fetchTasks();
-    //     const sortedArray = sortByDate(taskArray);
-    //     displayTasks(sortedArray);
-    //     displayProjects();
-    //     if (activeDateFilter === null){
-    //         setActiveProject(taskToDelete.project);
-    //     } 
-    // } else {
-    //     displayEmptyProjectOptions();
-    //     displayProjects();
-    //     setActiveDateFilter(undefined);
-    //     setActiveProject(taskToDelete.project);
-    // }
-    console.log(taskToDelete.project);
     switch (true) {
         case (taskToDelete.project === undefined):
             console.log(activeDateFilter.id);
