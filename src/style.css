@@ -298,11 +298,6 @@ li>button:focus {
 .bottomButtons {
     display: grid;
     justify-content: center;
-    /* grid-template-columns: 70px 50px;
-    align-items: center;
-    margin-top: 30px;
-    margin-left: 50px;
-    gap: 30px; */
 }
 
 #addNew:hover {
@@ -465,9 +460,9 @@ form {
     }
 
     #navBar {
-        padding: 10px 10px 10px 10px;
+        padding: 10px 5px 10px 5px;
         /* height: 80vh; */
-        width: 20vw;
+        width: 30vw;
         position: absolute;
         top: 60;
         right: 0;
@@ -475,13 +470,19 @@ form {
     }
 
     .filterButtons {
-        /* width: 150px; */
-        font-size: 25px;
+        width: 90%;
+        font-size: 5vw;
 
     }
     #projects {
-        font-size: 25px;
+        font-size: 5vw;
         margin-top: 40px;
+    }
+
+    .projectButton {
+        height: 30px;
+        width: 120px;
+        font-size: 3vw;
     }
 
     ul {
@@ -495,12 +496,12 @@ form {
     }
 
     li>button {
-        height: 30px;
-        width: 120px;
+        height: 25px;
+        width: 90%;
         border: none;
         text-align: center;
         background-color: transparent;  
-        font-size: 40px;
+        /* font-size: 25px; */
         
     }
     
@@ -513,11 +514,7 @@ form {
         gap: 10px;
     }
     
-    .projectButton {
-        height: 30px;
-        width: 120px;
-        font-size: 20px;
-    }
+   
 
     .projectDiv {
         display: grid;
@@ -562,10 +559,18 @@ form {
     .modalBody {
         display: grid;
         grid-template-columns: 110px 1fr;
+        width: 80vw;
     }
     textarea {
-        width: 380px;
+        width: 88%;
         height: 120px;
         display: block;
+    }
+
+    #priority {
+        display: block;
+    }
+    #submit {
+        margin-top: 20px;
     }
 }
