@@ -1,8 +1,8 @@
-import './style.css';
-import { initialiseLocalStorage } from './initialiseLocalStorage';
-import { interactivityHandler } from './interactivityHandler';
-import { displayTasks, displayProjects } from './displayHandler';
-import { fetchTasks, sortByDate } from './taskHandler';
+import "./style.css";
+import { initialiseLocalStorage } from "./initialiseLocalStorage";
+import { interactivityHandler } from "./interactivityHandler";
+import { displayTasks, displayProjects } from "./displayHandler";
+import { fetchTasks, sortByDate } from "./taskHandler";
 
 interactivityHandler();
 initialiseLocalStorage();
